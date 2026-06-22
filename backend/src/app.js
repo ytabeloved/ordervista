@@ -16,4 +16,10 @@ app.get("/", (req, res) => {
     });
 });
 
+//prueba de ruta
+
+const testRoutes = require("./routes/testRoutes");
+
+app.use("/api/test", testRoutes);
+
 module.exports = app;
