@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/userModel");
+const generateToken = require("../utils/generateToken");
 
 // Registra un nuevo usuario como cliente
 async function register(req, res) {
@@ -45,6 +46,57 @@ async function register(req, res) {
     }
 }
 
+// Inicia sesión y devuelve un token JWT
+async function login(req, res) {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                mensaje: "Debe ingresar correo y contraseña"
+            });
+        }
+
+        const user = await userModel.findByEmail(email);
+
+        if (!user) {
+            return res.status(401).json({
+                mensaje: "Credenciales inválidas"
+            });
+        }
+
+        const validPassword = await bcrypt.compare(password, user.password);
+
+        if (!validPassword) {
+            return res.status(401).json({
+                mensaje: "Credenciales inválidas"
+            });
+        }
+
+        const token = generateToken(user);
+
+        res.json({
+            mensaje: "Inicio de sesión correcto",
+            token,
+            usuario: {
+                id_usuario: user.id_usuario,
+                nombre: user.nombre,
+                apellido: user.apellido,
+                email: user.email,
+                id_rol: user.id_rol
+            }
+        });
+
+    } catch (error) {
+        console.error(error.message);
+
+        res.status(500).json({
+            mensaje: "Error al iniciar sesión"
+        });
+    }
+}
+
 module.exports = {
-    register
+    register,
+    login
 };
