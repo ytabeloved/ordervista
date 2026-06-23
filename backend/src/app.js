@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 
+const testRoutes = require("./routes/testRoutes");
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
 
 // Permite recibir solicitudes desde el frontend
@@ -16,10 +19,8 @@ app.get("/", (req, res) => {
     });
 });
 
-//prueba de ruta
-
-const testRoutes = require("./routes/testRoutes");
-
+// Rutas principales de la API
 app.use("/api/test", testRoutes);
+app.use("/api/auth", authRoutes);
 
 module.exports = app;
