@@ -96,7 +96,17 @@ async function login(req, res) {
     }
 }
 
+// Cierre de sesión
+function logout(req, res) {
+
+    res.status(200).json({
+        mensaje: "Sesión cerrada correctamente"
+    });
+
+}
+
 module.exports = {
     register,
-    login
+    login,
+    logout
 };
