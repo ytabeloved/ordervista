@@ -73,9 +73,48 @@ async function createUser(user) {
     return result.insertId;
 }
 
+// Actualiza un usuario existente
+async function updateUser(id, user) {
+
+    const [result] = await pool.query(
+        `UPDATE USUARIOS
+         SET nombre = ?,
+             apellido = ?,
+             email = ?,
+             telefono = ?,
+             id_rol = ?,
+             activo = ?
+         WHERE id_usuario = ?`,
+        [
+            user.nombre,
+            user.apellido,
+            user.email,
+            user.telefono,
+            user.id_rol,
+            user.activo,
+            id
+        ]
+    );
+
+    return result;
+}
+
+// Elimina un usuario
+async function deleteUser(id) {
+
+    const [result] = await pool.query(
+        "DELETE FROM USUARIOS WHERE id_usuario = ?",
+        [id]
+    );
+
+    return result;
+}
+
 module.exports = {
     getAllUsers,
     findByEmail,
     findById,
-    createUser
+    createUser,
+    updateUser,
+    deleteUser
 };
