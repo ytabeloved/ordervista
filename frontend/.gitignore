@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+#ignore .env files para no publicar la password
+node_modules/
+.env
