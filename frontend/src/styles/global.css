@@ -1,0 +1,245 @@
+:root {
+    --green-dark: #1b6b2a;
+    --green-main: #2e7d32;
+    --green-soft: #e8f5e9;
+    --orange: #ff9800;
+
+    --bg-main: #f7f8f6;
+    --bg-card: #ffffff;
+    --text-main: #111827;
+    --text-muted: #607064;
+    --border-soft: #e3e7e2;
+
+    --radius-md: 12px;
+    --radius-lg: 18px;
+
+    --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.app-layout {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+}
+
+.sidebar {
+    background: var(--green-dark);
+    color: white;
+    padding: 16px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.sidebar-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-link {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.sidebar-link.active,
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: white;
+}
+
+.main-shell {
+    min-width: 0;
+}
+
+.topbar {
+    min-height: 72px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 28px;
+}
+
+.topbar-title h1 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.topbar-title p {
+    margin: 4px 0 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.user-pill {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--green-main);
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+}
+
+.page-content {
+    padding: 28px;
+}
+
+.page-header h2 {
+    font-size: 28px;
+    margin: 0 0 8px;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: var(--shadow-soft);
+}
+
+.stat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: var(--green-soft);
+    color: var(--green-main);
+    display: grid;
+    place-items: center;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 28px;
+}
+
+.stat-trend {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--green-main);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.panel-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+    min-height: 280px;
+}
+
+.placeholder-chart {
+    height: 220px;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f7fbf7, #ffffff);
+    border: 1px dashed var(--border-soft);
+    display: grid;
+    place-items: center;
+    color: var(--text-muted);
+    margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .app-layout {
+        grid-template-columns: 56px 1fr;
+    }
+
+    .sidebar {
+        padding: 12px 6px;
+    }
+
+    .sidebar-link {
+        width: 40px;
+        height: 40px;
+    }
+
+    .topbar {
+        padding: 0 16px;
+    }
+
+    .page-content {
+        padding: 18px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header h2 {
+        font-size: 24px;
+    }
+}
