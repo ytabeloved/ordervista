@@ -1,0 +1,242 @@
+/* ===========================
+   SIDEBAR ADMINISTRADOR
+=========================== */
+
+.admin-sidebar{
+    width:240px;
+    height:100vh;
+    background:#16591f;
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-brand{
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:20px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.sidebar-brand-icon{
+
+    width:42px;
+    height:42px;
+
+    background:#2e7d32;
+
+    border-radius:10px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.sidebar-brand-icon img{
+
+    width:24px;
+
+}
+
+.sidebar-brand h2{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.sidebar-brand p{
+
+    margin-top:4px;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    opacity:.75;
+
+}
+
+/* ===========================
+   MENU
+=========================== */
+
+.sidebar-menu{
+
+    padding:16px 10px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+    flex:1;
+
+}
+
+.sidebar-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    text-decoration:none;
+
+    color:#d9eadb;
+
+    padding:14px 16px;
+
+    border-radius:10px;
+
+    transition:.2s;
+
+}
+
+.sidebar-item:hover{
+
+    background:#2d7b33;
+
+    color:white;
+
+}
+
+.sidebar-item.active{
+
+    background:#2d7b33;
+
+    color:white;
+
+}
+
+.sidebar-item-icon{
+
+    width:22px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.sidebar-item-label{
+
+    font-size:17px;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.sidebar-footer{
+
+    padding:18px 16px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.sidebar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:rgba(255,255,255,.06);
+
+    padding:14px;
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+}
+
+.sidebar-user-avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#2e7d32;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+}
+
+.sidebar-user span{
+
+    display:block;
+
+    font-size:13px;
+
+    opacity:.8;
+
+}
+
+.sidebar-action{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:none;
+
+    border:none;
+
+    color:#d9eadb;
+
+    padding:12px 0;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+.sidebar-action:hover{
+
+    color:white;
+
+}
+
+.admin-layout {
+    min-height: 100vh;
+    display: flex;
+    background: #f3f8f3;
+}
+
+.admin-main {
+    flex: 1;
+    min-width: 0;
+    padding: 32px;
+}
