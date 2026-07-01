@@ -9,3 +9,9 @@ export async function login(email, password) {
 
     return response.data;
 }
+
+// Elimina la sesión guardada en el navegador
+export function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+}

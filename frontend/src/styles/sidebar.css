@@ -3,15 +3,25 @@
 =========================== */
 
 .admin-sidebar{
-    width:240px;
-    height:100vh;
-    background:#16591f;
-    color:white;
 
-    display:flex;
-    flex-direction:column;
+    position: fixed;
 
-    border-right:1px solid rgba(255,255,255,.08);
+    top: 0;
+    left: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    background: #16591f;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid rgba(255,255,255,.08);
+
+    z-index: 1000;
+
 }
 
 .sidebar-brand{
@@ -237,6 +247,58 @@
 
 .admin-main {
     flex: 1;
+    margin-left: 240px;
     min-width: 0;
     padding: 32px;
+}
+
+/* ===========================
+   SIDEBAR COLAPSADO
+=========================== */
+
+.admin-sidebar.collapsed {
+    width: 76px;
+}
+
+.admin-sidebar.collapsed .sidebar-brand {
+    justify-content: center;
+    padding: 20px 10px;
+}
+
+.admin-sidebar.collapsed .sidebar-brand > div:last-child {
+    display: none;
+}
+
+.admin-sidebar.collapsed .sidebar-item {
+    justify-content: center;
+    padding: 14px 0;
+}
+
+.admin-sidebar.collapsed .sidebar-item-label {
+    display: none;
+}
+
+.admin-sidebar.collapsed .sidebar-footer {
+    padding: 18px 10px;
+}
+
+.admin-sidebar.collapsed .sidebar-user {
+    justify-content: center;
+    padding: 10px;
+}
+
+.admin-sidebar.collapsed .sidebar-user div:last-child {
+    display: none;
+}
+
+.admin-sidebar.collapsed .sidebar-action {
+    justify-content: center;
+}
+
+.admin-sidebar.collapsed .sidebar-action span {
+    display: none;
+}
+
+.admin-layout.sidebar-collapsed .admin-main {
+    margin-left: 76px;
 }

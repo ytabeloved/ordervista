@@ -1,5 +1,9 @@
 import logo from "../../assets/logo.svg";
 import SidebarItem from "./SidebarItem";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../services/authService";
+
 
 import {
     LayoutDashboard,
@@ -8,14 +12,41 @@ import {
     Package,
     ChartColumn,
     LogOut,
-    ChevronLeft
+    ChevronLeft,
 } from "lucide-react";
 
 // Menú lateral para el perfil Administrador
-function AdminSidebar() {
+function AdminSidebar({ 
+    collapsed, 
+    setCollapsed,
+    mobileMenuOpen,
+    setMobileMenuOpen
+}) {
+
+    const navigate = useNavigate();
+
+    const storedUser = localStorage.getItem("user");
+    const user = storedUser ? JSON.parse(storedUser) : null;
+
+    const userName = user
+        ? `${user.nombre} ${user.apellido}`
+        : "Usuario";
+
+    const userEmail = user?.email || "sin correo";
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
 
     return (
-        <aside className="admin-sidebar">
+            <aside
+                className={
+                    `admin-sidebar
+                    ${collapsed ? "collapsed" : ""}
+                    ${mobileMenuOpen ? "mobile-open" : ""}`
+                }
+            >
 
             <div className="sidebar-brand">
                 <div className="sidebar-brand-icon">
@@ -64,15 +95,18 @@ function AdminSidebar() {
 
             <div className="sidebar-footer">
                 <div className="sidebar-user">
-                    <div className="sidebar-user-avatar">MS</div>
+                    <div className="sidebar-user-avatar">
+                        {user?.nombre?.charAt(0).toUpperCase() || "U"}
+                    </div>
 
                     <div>
-                        <strong>María Silva</strong>
-                        <span>maria@ordervista.com</span>
+                        <strong>{userName}</strong>
+                        <span>{userEmail}</span>
                     </div>
                 </div>
 
-                <button className="sidebar-action">
+                <button className="sidebar-action" 
+                onClick={handleLogout}>
 
                     <LogOut size={18} />
 
@@ -80,7 +114,7 @@ function AdminSidebar() {
 
                 </button>
 
-                <button className="sidebar-action">
+                <button className="sidebar-action" onClick={() => setCollapsed(!collapsed)}>
 
                     <ChevronLeft size={18} />
 
