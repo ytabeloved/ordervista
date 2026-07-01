@@ -13,4 +13,4 @@ function StatCard({ title, value, trend, icon }) {
     );
 }
 
-export default StatCard;
+export default StatCardold;
