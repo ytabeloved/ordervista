@@ -1,0 +1,36 @@
+.category-mobile-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.category-mobile-card h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.category-mobile-card p {
+    margin: 6px 0 0;
+    color: #667466;
+    font-size: 14px;
+}
+
+.category-mobile-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.categories-mobile-list {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .categories-mobile-list {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+}

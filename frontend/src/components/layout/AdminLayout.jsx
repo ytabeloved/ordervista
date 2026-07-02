@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import AdminSidebar from "../sidebar/AdminSidebar";
 import TopBar from "../topbar/TopBar";
 
+
 function AdminLayout() {
     const [collapsed, setCollapsed] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

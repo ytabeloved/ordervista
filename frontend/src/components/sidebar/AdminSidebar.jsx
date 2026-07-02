@@ -1,6 +1,5 @@
 import logo from "../../assets/logo.svg";
 import SidebarItem from "./SidebarItem";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
 import Avatar from "../common/Avatar";
