@@ -3,6 +3,7 @@ import SidebarItem from "./SidebarItem";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services/authService";
+import Avatar from "../common/Avatar";
 
 
 import {
@@ -95,9 +96,11 @@ function AdminSidebar({
 
             <div className="sidebar-footer">
                 <div className="sidebar-user">
-                    <div className="sidebar-user-avatar">
-                        {user?.nombre?.charAt(0).toUpperCase() || "U"}
-                    </div>
+                    <Avatar
+                        firstName={user?.nombre}
+                        lastName={user?.apellido}
+                        size="sm"
+                    />
 
                     <div>
                         <strong>{userName}</strong>

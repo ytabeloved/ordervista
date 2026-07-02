@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Search, Plus } from "lucide-react";
-
+import CrudToolbar from "../../components/common/CrudToolbar";
+import PageHeader from "../../components/common/PageHeader";
 import Modal from "../../components/common/Modal";
 import UserForm from "../../components/users/UserForm";
 import UserTable from "../../components/users/UserTable";
@@ -13,6 +13,9 @@ import {
 } from "../../services/userService";
 
 import "../../styles/users.css";
+
+import ConfirmDialog from "../../components/common/ConfirmDialog";
+
 
 function Users() {
     const [users, setUsers] = useState([]);
@@ -159,48 +162,30 @@ function Users() {
     return (
         <>
             <section className="users-page">
-                <div className="users-header">
-                    <div>
-                        <h1>Users</h1>
-                        <p>{users.length} total users</p>
-                    </div>
+                <PageHeader
+                    title="Users"
+                    subtitle={`${users.length} total users`}
+                    buttonText="Add User"
+                    onButtonClick={() => {
+                        setEditingUser(null);
+                        resetForm();
+                        setShowModal(true);
+                    }}
+                />
 
-                    <button
-                        className="btn-primary"
-                        onClick={() => {
-                            setEditingUser(null);
-                            resetForm();
-                            setShowModal(true);
-                        }}
-                    >
-                        <Plus size={18} />
-                        Add User
-                    </button>
-                </div>
-
-                <div className="users-toolbar">
-                    <div className="users-search">
-                        <Search size={20} />
-                        <input
-                            type="text"
-                            placeholder="Search users..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="users-filters">
-                        {["Todos", "Administrador", "Operador", "Cliente"].map((role) => (
-                            <button
-                                key={role}
-                                className={roleFilter === role ? "active" : ""}
-                                onClick={() => setRoleFilter(role)}
-                            >
-                                {role === "Todos" ? "All" : role}
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                <CrudToolbar
+                    searchValue={search}
+                    onSearchChange={setSearch}
+                    searchPlaceholder="Search users..."
+                    filters={[
+                        { label: "All", value: "Todos" },
+                        { label: "Administrador", value: "Administrador" },
+                        { label: "Operador", value: "Operador" },
+                        { label: "Cliente", value: "Cliente" }
+                    ]}
+                    activeFilter={roleFilter}
+                    onFilterChange={setRoleFilter}
+                />               
 
                 {loading ? (
                     <p>Cargando usuarios...</p>
@@ -229,38 +214,15 @@ function Users() {
                 </Modal>
             )}
 
-            {showDeleteModal && (
-                <Modal
-                    title="Delete User"
-                    onClose={closeDeleteModal}
-                >
-                    <p>
-                        ¿Seguro que deseas eliminar a{" "}
-                        <strong>
-                            {userToDelete?.nombre} {userToDelete?.apellido}
-                        </strong>
-                        ?
-                    </p>
-
-                    <div className="form-actions">
-                        <button
-                            type="button"
-                            className="btn-secondary"
-                            onClick={closeDeleteModal}
-                        >
-                            Cancelar
-                        </button>
-
-                        <button
-                            type="button"
-                            className="btn-danger"
-                            onClick={confirmDelete}
-                        >
-                            Eliminar
-                        </button>
-                    </div>
-                </Modal>
-            )}
+            <ConfirmDialog
+                open={showDeleteModal}
+                title="Delete User"
+                message={`¿Seguro que deseas eliminar a ${userToDelete?.nombre ?? ""} ${userToDelete?.apellido ?? ""}?`}
+                confirmText="Eliminar"
+                cancelText="Cancelar"
+                onConfirm={confirmDelete}
+                onCancel={closeDeleteModal}
+            />
         </>
     );
 }

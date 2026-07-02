@@ -1,75 +1,113 @@
-import { Pencil, Trash2 } from "lucide-react";
+import Badge from "../common/Badge";
+import ActionButtons from "../common/ActionButtons";
+import UserMobileCard from "./UserMobileCard";
+import Avatar from "../common/Avatar";
 
-function getInitials(user) {
-    const nombre = user.nombre?.charAt(0) || "";
-    const apellido = user.apellido?.charAt(0) || "";
 
-    return `${nombre}${apellido}`.toUpperCase();
+function getRoleType(role) {
+    switch (role) {
+        case "Administrador":
+            return "admin";
+        case "Operador":
+            return "operator";
+        default:
+            return "customer";
+    }
 }
 
 function UserTable({ users, onEdit, onDelete }) {
     return (
-        <div className="users-table-card">
-            <table className="users-table">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+        <>
+            {/* ======== Vista Desktop ======== */}
 
-                <tbody>
-                    {users.map((user) => (
-                        <tr key={user.id_usuario}>
-                            <td>
-                                <div className="user-cell">
-                                    <div className="user-avatar">
-                                        {getInitials(user)}
-                                    </div>
-
-                                    <strong>
-                                        {user.nombre} {user.apellido}
-                                    </strong>
-                                </div>
-                            </td>
-
-                            <td>{user.email}</td>
-                            <td>{user.telefono || "Sin teléfono"}</td>
-
-                            <td>
-                                <span className={`role-badge ${user.rol?.toLowerCase()}`}>
-                                    {user.rol}
-                                </span>
-                            </td>
-
-                            <td>
-                                <span className={user.activo ? "status-badge active" : "status-badge inactive"}>
-                                    {user.activo ? "Active" : "Inactive"}
-                                </span>
-                            </td>
-
-                            <td>
-                               <button className="icon-button"  onClick={() => onEdit(user)}>
-                                    <Pencil size={18} />
-                                </button>
-
-                                <button className="icon-button delete" onClick={() => onDelete(user)}>
-                                    <Trash2 size={18} />
-                                </button>
-                            </td>
+            <div className="users-table-card">
+                <table className="users-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
 
-            {users.length === 0 && (
-                <p className="empty-table">No se encontraron usuarios.</p>
-            )}
-        </div>
+                    <tbody>
+                        {users.map((user) => (
+                            <tr key={user.id_usuario}>
+                                <td>
+                                    <div className="user-cell">
+                                        <Avatar
+                                            firstName={user.nombre}
+                                            lastName={user.apellido}
+                                        />
+
+                                        <strong>
+                                            {user.nombre} {user.apellido}
+                                        </strong>
+                                    </div>
+                                </td>
+
+                                <td>{user.email}</td>
+
+                                <td>
+                                    {user.telefono || "Sin teléfono"}
+                                </td>
+
+                                <td>
+                                    <Badge
+                                        type={getRoleType(user.rol)}
+                                    >
+                                        {user.rol}
+                                    </Badge>
+                                </td>
+
+                                <td>
+                                    <Badge
+                                        type={
+                                            user.activo
+                                                ? "active"
+                                                : "inactive"
+                                        }
+                                    >
+                                        {user.activo
+                                            ? "Active"
+                                            : "Inactive"}
+                                    </Badge>
+                                </td>
+
+                                <td>
+                                    <ActionButtons
+                                        onEdit={() => onEdit(user)}
+                                        onDelete={() => onDelete(user)}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+                {users.length === 0 && (
+                    <p className="empty-table">
+                        No se encontraron usuarios.
+                    </p>
+                )}
+            </div>
+
+            {/* ======== Vista Mobile ======== */}
+
+            <div className="users-mobile-list">
+                {users.map((user) => (
+                    <UserMobileCard
+                        key={user.id_usuario}
+                        user={user}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                    />
+                ))}
+            </div>
+        </>
     );
 }
 
