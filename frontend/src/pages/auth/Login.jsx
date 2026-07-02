@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
 import logo from "../../assets/logo.svg";
 import "../../styles/login.css";
 import demoUsers from "../../config/demoUsers";
+
 
 function Login() {
 
@@ -158,13 +159,20 @@ function loadDemoUser(role) {
                 </div>
 
                 {/* Enlace para registrar un nuevo usuario */}
-                <p className="login-register">
+               <div className="login-divider"></div>
 
-                    Don't have an account?
+                    <p className="login-register">
 
-                    <span> Create one</span>
+                        No tienes una cuenta?
 
-                </p>
+                    </p>
+
+                    <Link
+                        className="login-register-button"
+                        to="/register"
+                    >
+                        Registrate
+                    </Link>
 
             </form>
 

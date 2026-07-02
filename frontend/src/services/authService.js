@@ -15,3 +15,9 @@ export function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 }
+
+// Envía los datos del usuario al backend para registrarlo y devuelve la respuesta
+export async function register(userData) {
+    const response = await api.post("/auth/register", userData);
+    return response.data;
+}

@@ -222,3 +222,28 @@
         font-size: 24px;
     }
 }
+
+/* aqui empiezan los estilos para la pantallaa de registro */
+
+.login-register{
+    margin-top:20px;
+    text-align:center;
+    color:#666;
+}
+
+.login-register-button{
+    display:block;
+    margin-top:12px;
+    padding:12px;
+    text-align:center;
+    border:2px solid #2e7d32;
+    border-radius:10px;
+    color:#2e7d32;
+    font-weight:600;
+    transition:.2s;
+}
+
+.login-register-button:hover{
+    background:#2e7d32;
+    color:white;
+}
