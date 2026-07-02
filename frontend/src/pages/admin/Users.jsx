@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
-import CrudToolbar from "../../components/common/CrudToolbar";
 import PageHeader from "../../components/common/PageHeader";
+import CrudToolbar from "../../components/common/CrudToolbar";
 import Modal from "../../components/common/Modal";
-import UserForm from "../../components/users/UserForm";
+import ConfirmDialog from "../../components/common/ConfirmDialog";
+
 import UserTable from "../../components/users/UserTable";
+import UserForm from "../../components/users/UserForm";
+
+import useCrud from "../../hooks/useCrud";
+import useSearchFilter from "../../hooks/useSearchFilter";
 
 import {
     getUsers,
@@ -14,215 +18,187 @@ import {
 
 import "../../styles/users.css";
 
-import ConfirmDialog from "../../components/common/ConfirmDialog";
-
+const initialFormData = {
+    nombre: "",
+    apellido: "",
+    email: "",
+    password: "",
+    telefono: "",
+    id_rol: 3,
+    activo: true
+};
 
 function Users() {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [search, setSearch] = useState("");
-    const [roleFilter, setRoleFilter] = useState("Todos");
 
-    const [showModal, setShowModal] = useState(false);
-    const [editingUser, setEditingUser] = useState(null);
+    const crud = useCrud({
 
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [userToDelete, setUserToDelete] = useState(null);
+        getAll: getUsers,
+        createItem: createUser,
+        updateItem: updateUser,
+        deleteItem: deleteUser,
 
-    const [formData, setFormData] = useState({
-        nombre: "",
-        apellido: "",
-        email: "",
-        password: "",
-        telefono: "",
-        id_rol: 3,
-        activo: true
-    });
+        getId: (user) => user.id_usuario,
 
-    async function loadUsers() {
-        try {
-            const data = await getUsers();
-            setUsers(data);
-        } catch (error) {
-            console.error(error);
-            alert("No fue posible cargar los usuarios.");
-        } finally {
-            setLoading(false);
-        }
-    }
+        initialFormData,
 
-    function resetForm() {
-        setFormData({
-            nombre: "",
-            apellido: "",
-            email: "",
-            password: "",
-            telefono: "",
-            id_rol: 3,
-            activo: true
-        });
-    }
+        mapItemToForm: (user) => ({
 
-    function closeUserModal() {
-        setShowModal(false);
-        setEditingUser(null);
-        resetForm();
-    }
-
-    function closeDeleteModal() {
-        setShowDeleteModal(false);
-        setUserToDelete(null);
-    }
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        try {
-            const userPayload = {
-                ...formData,
-                id_rol: Number(formData.id_rol),
-                activo:
-                    formData.activo === true ||
-                    formData.activo === "true"
-            };
-
-            if (editingUser) {
-                await updateUser(editingUser.id_usuario, userPayload);
-            } else {
-                await createUser(userPayload);
-            }
-
-            await loadUsers();
-            closeUserModal();
-
-        } catch (error) {
-            console.error(error);
-            alert("No fue posible guardar el usuario.");
-        }
-    }
-
-    function handleEdit(user) {
-        setEditingUser(user);
-
-        setFormData({
             nombre: user.nombre,
             apellido: user.apellido,
             email: user.email,
             password: "",
             telefono: user.telefono || "",
+
             id_rol:
                 user.rol === "Administrador"
                     ? 1
                     : user.rol === "Operador"
                     ? 2
                     : 3,
+
             activo: user.activo ? true : false
-        });
 
-        setShowModal(true);
-    }
+        }),
 
-    function handleDelete(user) {
-        setUserToDelete(user);
-        setShowDeleteModal(true);
-    }
+        buildPayload: (formData) => ({
 
-    async function confirmDelete() {
-        try {
-            await deleteUser(userToDelete.id_usuario);
-            await loadUsers();
-            closeDeleteModal();
+            ...formData,
 
-        } catch (error) {
-            console.error(error);
-            alert("No fue posible eliminar el usuario.");
+            id_rol: Number(formData.id_rol),
+
+            activo:
+                formData.activo === true ||
+                formData.activo === "true"
+
+        }),
+
+        errorMessages: {
+
+            load: "No fue posible cargar los usuarios.",
+
+            save: "No fue posible guardar el usuario.",
+
+            delete: "No fue posible eliminar el usuario."
+
         }
-    }
 
-    useEffect(() => {
-        loadUsers();
-    }, []);
+    });
 
-    const filteredUsers = users.filter((user) => {
-        const fullName = `${user.nombre} ${user.apellido}`.toLowerCase();
-        const email = user.email.toLowerCase();
-        const searchText = search.toLowerCase();
+    const search = useSearchFilter({
 
-        const matchesSearch =
-            fullName.includes(searchText) ||
-            email.includes(searchText);
+        items: crud.items,
 
-        const matchesRole =
-            roleFilter === "Todos" ||
-            user.rol === roleFilter;
+        searchFields: [
+            "nombre",
+            "apellido",
+            "email"
+        ],
 
-        return matchesSearch && matchesRole;
+        filterValue: "Todos",
+
+        filterFunction: (user, filter) =>
+
+            filter === "Todos" ||
+
+            user.rol === filter
+
     });
 
     return (
         <>
             <section className="users-page">
+
                 <PageHeader
                     title="Users"
-                    subtitle={`${users.length} total users`}
+                    subtitle={`${crud.items.length} total users`}
                     buttonText="Add User"
-                    onButtonClick={() => {
-                        setEditingUser(null);
-                        resetForm();
-                        setShowModal(true);
-                    }}
+                    onButtonClick={crud.openCreate}
                 />
 
                 <CrudToolbar
-                    searchValue={search}
-                    onSearchChange={setSearch}
+                    searchValue={search.search}
+                    onSearchChange={search.setSearch}
                     searchPlaceholder="Search users..."
                     filters={[
-                        { label: "All", value: "Todos" },
-                        { label: "Administrador", value: "Administrador" },
-                        { label: "Operador", value: "Operador" },
-                        { label: "Cliente", value: "Cliente" }
+                        {
+                            label: "All",
+                            value: "Todos"
+                        },
+                        {
+                            label: "Administrador",
+                            value: "Administrador"
+                        },
+                        {
+                            label: "Operador",
+                            value: "Operador"
+                        },
+                        {
+                            label: "Cliente",
+                            value: "Cliente"
+                        }
                     ]}
-                    activeFilter={roleFilter}
-                    onFilterChange={setRoleFilter}
-                />               
+                    activeFilter={search.activeFilter}
+                    onFilterChange={search.setActiveFilter}
+                />
 
-                {loading ? (
+                {crud.loading ? (
+
                     <p>Cargando usuarios...</p>
+
                 ) : (
+
                     <UserTable
-                        users={filteredUsers}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
+                        users={search.filteredItems}
+                        onEdit={crud.openEdit}
+                        onDelete={crud.openDelete}
                     />
+
                 )}
+
             </section>
 
-            {showModal && (
+            {crud.showModal && (
+
                 <Modal
-                    title={editingUser ? "Edit User" : "New User"}
-                    onClose={closeUserModal}
+                    title={
+                        crud.editingItem
+                            ? "Edit User"
+                            : "New User"
+                    }
+                    onClose={crud.closeModal}
                 >
+
                     <UserForm
-                        formData={formData}
-                        setFormData={setFormData}
-                        onSubmit={handleSubmit}
-                        onCancel={closeUserModal}
-                        submitText={editingUser ? "Save Changes" : "Create User"}
-                        mode={editingUser ? "edit" : "create"}
+                        formData={crud.formData}
+                        setFormData={crud.setFormData}
+                        onSubmit={crud.submit}
+                        onCancel={crud.closeModal}
+                        submitText={
+                            crud.editingItem
+                                ? "Save Changes"
+                                : "Create User"
+                        }
+                        mode={
+                            crud.editingItem
+                                ? "edit"
+                                : "create"
+                        }
                     />
+
                 </Modal>
+
             )}
 
             <ConfirmDialog
-                open={showDeleteModal}
+                open={crud.showDeleteModal}
                 title="Delete User"
-                message={`¿Seguro que deseas eliminar a ${userToDelete?.nombre ?? ""} ${userToDelete?.apellido ?? ""}?`}
+                message={`¿Seguro que deseas eliminar a ${crud.itemToDelete?.nombre ?? ""} ${crud.itemToDelete?.apellido ?? ""}?`}
                 confirmText="Eliminar"
                 cancelText="Cancelar"
-                onConfirm={confirmDelete}
-                onCancel={closeDeleteModal}
+                onConfirm={crud.confirmDelete}
+                onCancel={crud.closeDeleteModal}
             />
+
         </>
     );
 }

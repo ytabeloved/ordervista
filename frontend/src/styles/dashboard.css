@@ -189,3 +189,20 @@ grid-template-columns:1fr;
     color:#721c24;
 
 }
+
+.dashboard-stats,
+.dashboard-charts,
+.dashboard-card,
+.stat-card {
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+@-moz-document url-prefix() {
+    .dashboard-stats,
+    .dashboard-charts,
+    .dashboard-card,
+    .stat-card {
+        animation-duration: .85s;
+    }
+}

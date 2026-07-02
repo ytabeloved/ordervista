@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import PageHeader from "../../components/common/PageHeader";
 import CrudToolbar from "../../components/common/CrudToolbar";
 import Modal from "../../components/common/Modal";
@@ -7,6 +5,9 @@ import ConfirmDialog from "../../components/common/ConfirmDialog";
 
 import CategoryTable from "../../components/categories/CategoryTable";
 import CategoryForm from "../../components/categories/CategoryForm";
+
+import useCrud from "../../hooks/useCrud";
+import useSearchFilter from "../../hooks/useSearchFilter";
 
 import {
     getCategories,
@@ -17,129 +18,51 @@ import {
 
 import "../../styles/categories.css";
 
+const initialFormData = {
+    nombre: "",
+    descripcion: "",
+    activo: true
+};
+
 function Categories() {
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [search, setSearch] = useState("");
-    const [statusFilter, setStatusFilter] = useState("Todos");
-
-    const [showModal, setShowModal] = useState(false);
-    const [editingCategory, setEditingCategory] = useState(null);
-
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [categoryToDelete, setCategoryToDelete] = useState(null);
-
-    const [formData, setFormData] = useState({
-        nombre: "",
-        descripcion: "",
-        activo: true
-    });
-
-    async function loadCategories() {
-        try {
-            const data = await getCategories();
-            setCategories(data);
-        } catch (error) {
-            console.error(error);
-            alert("No fue posible cargar las categorías.");
-        } finally {
-            setLoading(false);
-        }
-    }
-
-    function resetForm() {
-        setFormData({
-            nombre: "",
-            descripcion: "",
-            activo: true
-        });
-    }
-
-    function closeCategoryModal() {
-        setShowModal(false);
-        setEditingCategory(null);
-        resetForm();
-    }
-
-    function closeDeleteModal() {
-        setShowDeleteModal(false);
-        setCategoryToDelete(null);
-    }
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        try {
-            const payload = {
-                ...formData,
-                activo:
-                    formData.activo === true ||
-                    formData.activo === "true"
-            };
-
-            if (editingCategory) {
-                await updateCategory(editingCategory.id_categoria, payload);
-            } else {
-                await createCategory(payload);
-            }
-
-            await loadCategories();
-            closeCategoryModal();
-
-        } catch (error) {
-            console.error(error);
-            alert("No fue posible guardar la categoría.");
-        }
-    }
-
-    function handleEdit(category) {
-        setEditingCategory(category);
-
-        setFormData({
+    const crud = useCrud({
+        getAll: getCategories,
+        createItem: createCategory,
+        updateItem: updateCategory,
+        deleteItem: deleteCategory,
+        getId: (category) => category.id_categoria,
+        initialFormData,
+        mapItemToForm: (category) => ({
             nombre: category.nombre,
             descripcion: category.descripcion || "",
             activo: category.activa || category.activo ? true : false
-        });
-
-        setShowModal(true);
-    }
-
-    function handleDelete(category) {
-        setCategoryToDelete(category);
-        setShowDeleteModal(true);
-    }
-
-    async function confirmDelete() {
-        try {
-            await deleteCategory(categoryToDelete.id_categoria);
-            await loadCategories();
-            closeDeleteModal();
-
-        } catch (error) {
-            console.error(error);
-            alert("No fue posible eliminar la categoría.");
+        }),
+        buildPayload: (formData) => ({
+            ...formData,
+            activo:
+                formData.activo === true ||
+                formData.activo === "true"
+        }),
+        errorMessages: {
+            load: "No fue posible cargar las categorías.",
+            save: "No fue posible guardar la categoría.",
+            delete: "No fue posible eliminar la categoría."
         }
-    }
+    });
 
-    useEffect(() => {
-        loadCategories();
-    }, []);
+    const search = useSearchFilter({
+        items: crud.items,
+        searchFields: ["nombre", "descripcion"],
+        filterValue: "Todos",
+        filterFunction: (category, filter) => {
+            const isActive = category.activa || category.activo;
 
-    const filteredCategories = categories.filter((category) => {
-        const searchText = search.toLowerCase();
-
-        const matchesSearch =
-            category.nombre.toLowerCase().includes(searchText) ||
-            (category.descripcion || "").toLowerCase().includes(searchText);
-
-        const isActive = category.activa || category.activo;
-
-        const matchesStatus =
-            statusFilter === "Todos" ||
-            (statusFilter === "Activas" && isActive) ||
-            (statusFilter === "Inactivas" && !isActive);
-
-        return matchesSearch && matchesStatus;
+            return (
+                filter === "Todos" ||
+                (filter === "Activas" && isActive) ||
+                (filter === "Inactivas" && !isActive)
+            );
+        }
     });
 
     return (
@@ -147,55 +70,51 @@ function Categories() {
             <section className="categories-page">
                 <PageHeader
                     title="Categories"
-                    subtitle={`${categories.length} total categories`}
+                    subtitle={`${crud.items.length} total categories`}
                     buttonText="Add Category"
-                    onButtonClick={() => {
-                        setEditingCategory(null);
-                        resetForm();
-                        setShowModal(true);
-                    }}
+                    onButtonClick={crud.openCreate}
                 />
 
                 <CrudToolbar
-                    searchValue={search}
-                    onSearchChange={setSearch}
+                    searchValue={search.search}
+                    onSearchChange={search.setSearch}
                     searchPlaceholder="Search categories..."
                     filters={[
                         { label: "All", value: "Todos" },
                         { label: "Activas", value: "Activas" },
                         { label: "Inactivas", value: "Inactivas" }
                     ]}
-                    activeFilter={statusFilter}
-                    onFilterChange={setStatusFilter}
+                    activeFilter={search.activeFilter}
+                    onFilterChange={search.setActiveFilter}
                 />
 
-                {loading ? (
+                {crud.loading ? (
                     <p>Cargando categorías...</p>
                 ) : (
                     <CategoryTable
-                        categories={filteredCategories}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
+                        categories={search.filteredItems}
+                        onEdit={crud.openEdit}
+                        onDelete={crud.openDelete}
                     />
                 )}
             </section>
 
-            {showModal && (
+            {crud.showModal && (
                 <Modal
                     title={
-                        editingCategory
+                        crud.editingItem
                             ? "Edit Category"
                             : "New Category"
                     }
-                    onClose={closeCategoryModal}
+                    onClose={crud.closeModal}
                 >
                     <CategoryForm
-                        formData={formData}
-                        setFormData={setFormData}
-                        onSubmit={handleSubmit}
-                        onCancel={closeCategoryModal}
+                        formData={crud.formData}
+                        setFormData={crud.setFormData}
+                        onSubmit={crud.submit}
+                        onCancel={crud.closeModal}
                         submitText={
-                            editingCategory
+                            crud.editingItem
                                 ? "Save Changes"
                                 : "Create Category"
                         }
@@ -204,13 +123,13 @@ function Categories() {
             )}
 
             <ConfirmDialog
-                open={showDeleteModal}
+                open={crud.showDeleteModal}
                 title="Delete Category"
-                message={`¿Seguro que deseas eliminar la categoría ${categoryToDelete?.nombre ?? ""}?`}
+                message={`¿Seguro que deseas eliminar la categoría ${crud.itemToDelete?.nombre ?? ""}?`}
                 confirmText="Eliminar"
                 cancelText="Cancelar"
-                onConfirm={confirmDelete}
-                onCancel={closeDeleteModal}
+                onConfirm={crud.confirmDelete}
+                onCancel={crud.closeDeleteModal}
             />
         </>
     );

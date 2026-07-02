@@ -19,8 +19,7 @@ import {
 function AdminSidebar({ 
     collapsed, 
     setCollapsed,
-    mobileMenuOpen,
-    setMobileMenuOpen
+    mobileMenuOpen
 }) {
 
     const navigate = useNavigate();
