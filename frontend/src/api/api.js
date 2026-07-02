@@ -1,12 +1,11 @@
 import axios from "axios";
+import { logout } from "../services/authService";
 
 const api = axios.create({
     baseURL: "http://localhost:3000/api"
 });
 
-// Agrega el token a cada solicitud si existe sesión iniciada
 api.interceptors.request.use((config) => {
-
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -14,7 +13,25 @@ api.interceptors.request.use((config) => {
     }
 
     return config;
-
 });
+
+api.interceptors.response.use(
+    (response) => response,
+
+    (error) => {
+        if (error.response?.status === 401) {
+            logout();
+
+            localStorage.setItem(
+                "sessionMessage",
+                "Tu sesión expiró. Inicia sesión nuevamente."
+            );
+
+            window.location.href = "/login";
+        }
+
+        return Promise.reject(error);
+    }
+);
 
 export default api;

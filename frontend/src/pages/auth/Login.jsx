@@ -17,6 +17,7 @@ function Login() {
 
     // Guarda el mensaje de error si el login falla
     const [error, setError] = useState("");
+    const sessionMessage = localStorage.getItem("sessionMessage");
 
     // Carga un usuario de prueba en el formulario
 function loadDemoUser(role) {
@@ -37,6 +38,7 @@ function loadDemoUser(role) {
 
         // Limpia cualquier error anterior
         setError("");
+        localStorage.removeItem("sessionMessage");
 
         try {
 
@@ -123,6 +125,12 @@ function loadDemoUser(role) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+
+                {sessionMessage && (
+                    <p className="login-error">
+                        {sessionMessage}
+                    </p>
+                )}
 
                 {/* Mensaje de error */}
                 {error && (
