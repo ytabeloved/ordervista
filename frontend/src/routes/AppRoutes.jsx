@@ -5,7 +5,7 @@ import Users from "../pages/admin/Users";
 import Login from "../pages/auth/Login";
 import Categories from "../pages/admin/Categories";
 import Products from "../pages/admin/Products";
-
+import Menu from "../pages/customer/Menu";
 import AdminLayout from "../components/layout/AdminLayout";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Register from "../pages/auth/Register";
@@ -23,6 +23,15 @@ function AppRoutes() {
 
 
  {/*dentro  de  estas rutas se encuentra el layout de admin y las rutas protegidas para el dashboard, usuarios, categorias y productos*/}
+                 <Route
+                    path="/menu"
+                    element={
+                        <ProtectedRoute>
+                            <Menu />
+                        </ProtectedRoute>
+                    }
+                />
+                
                 <Route
                     element={
                         <ProtectedRoute>
@@ -31,10 +40,12 @@ function AppRoutes() {
                     }
                 >
 
+               
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/usuarios" element={<Users />} />
                     <Route path="/categorias" element={<Categories />} />
                     <Route path="/productos" element={<Products />} />
+                  
                     
                     
 

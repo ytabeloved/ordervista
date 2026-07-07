@@ -9,10 +9,10 @@ function CategoryTable({ categories, onEdit, onDelete }) {
                 <table className="users-table">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>Categorias</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
 

@@ -4,7 +4,7 @@ import SearchInput from "./SearchInput";
 function CrudToolbar({
     searchValue,
     onSearchChange,
-    searchPlaceholder = "Search...",
+    searchPlaceholder = "Buscar...",
     filters = [],
     activeFilter,
     onFilterChange

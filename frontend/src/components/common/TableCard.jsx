@@ -1,7 +1,7 @@
 function TableCard({
     items = [],
     children,
-    emptyMessage = "No records found."
+    emptyMessage = "No hay elementos para mostrar.",
 }) {
     const isEmpty = items.length === 0;
 
