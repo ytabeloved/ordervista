@@ -1,4 +1,5 @@
 import { X, Plus } from "lucide-react";
+import { addToCart } from "../../services/cartService";
 
 function ProductDetail({ product, onClose, onAddToCart }) {
     if (!product) {
@@ -42,7 +43,13 @@ function ProductDetail({ product, onClose, onAddToCart }) {
                     <button
                         type="button"
                         className="customer-add-button"
-                        onClick={() => onAddToCart?.(product)}
+                        onClick={() => {
+
+                            addToCart(product);
+
+                            onAddToCart?.(product);
+
+                        }}
                     >
                         <Plus size={18} />
                         Add to Cart

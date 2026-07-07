@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import Cart from "../pages/customer/Cart";
 import Dashboard from "../pages/admin/Dashboard";
 import Users from "../pages/admin/Users";
 import Login from "../pages/auth/Login";
@@ -30,6 +30,15 @@ function AppRoutes() {
                     element={
                         <ProtectedRoute>
                             <Menu />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/cart"
+                    element={
+                        <ProtectedRoute>
+                            <Cart />
                         </ProtectedRoute>
                     }
                 />

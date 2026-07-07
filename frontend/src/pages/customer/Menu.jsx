@@ -4,7 +4,7 @@ import CustomerLayout from "../../components/customer/CustomerLayout";
 import CategoryTabs from "../../components/customer/CategoryTabs";
 import ProductGrid from "../../components/customer/ProductGrid";
 import ProductDetail from "./ProductDetail";
-
+import { addToCart } from "../../services/cartService";
 import { getMenu } from "../../services/menuService";
 
 import "../../styles/customer.css";
@@ -37,7 +37,9 @@ function Menu() {
     }, []);
 
     function handleAddToCart(product) {
-        console.log("Agregar al carrito:", product);
+        addToCart(product);
+
+        alert(`Se agregó "${product.nombre}" al carrito.`);
     }
 
     return (
