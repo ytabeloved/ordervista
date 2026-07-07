@@ -10,6 +10,7 @@ import AdminLayout from "../components/layout/AdminLayout";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Register from "../pages/auth/Register";
 
+
 function AppRoutes() {
 
     return (
@@ -31,7 +32,8 @@ function AppRoutes() {
                         </ProtectedRoute>
                     }
                 />
-                
+
+                           
                 <Route
                     element={
                         <ProtectedRoute>

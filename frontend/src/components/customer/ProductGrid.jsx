@@ -1,6 +1,12 @@
 import ProductCard from "./ProductCard";
 
-function ProductGrid({ products = [], selectedCategory, search }) {
+function ProductGrid({
+    products = [],
+    selectedCategory,
+    search,
+    onView,
+    onAddToCart
+}) {
     const filteredProducts = products.filter((product) => {
         const matchesCategory =
             selectedCategory === "all" ||
@@ -30,6 +36,8 @@ function ProductGrid({ products = [], selectedCategory, search }) {
                 <ProductCard
                     key={product.id_producto}
                     product={product}
+                    onView={onView}
+                    onAddToCart={onAddToCart}
                 />
             ))}
         </div>

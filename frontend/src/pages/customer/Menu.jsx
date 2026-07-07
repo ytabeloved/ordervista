@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CustomerLayout from "../../components/customer/CustomerLayout";
 import CategoryTabs from "../../components/customer/CategoryTabs";
 import ProductGrid from "../../components/customer/ProductGrid";
+import ProductDetail from "./ProductDetail";
 
 import { getMenu } from "../../services/menuService";
 
@@ -14,6 +15,7 @@ function Menu() {
 
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -33,6 +35,10 @@ function Menu() {
 
         loadMenu();
     }, []);
+
+    function handleAddToCart(product) {
+        console.log("Agregar al carrito:", product);
+    }
 
     return (
         <CustomerLayout>
@@ -68,10 +74,18 @@ function Menu() {
                             products={products}
                             selectedCategory={selectedCategory}
                             search={search}
+                            onView={setSelectedProduct}
+                            onAddToCart={handleAddToCart}
                         />
                     </>
                 )}
             </section>
+
+            <ProductDetail
+                product={selectedProduct}
+                onClose={() => setSelectedProduct(null)}
+                onAddToCart={handleAddToCart}
+            />
         </CustomerLayout>
     );
 }
