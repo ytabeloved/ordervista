@@ -9,6 +9,7 @@ import Menu from "../pages/customer/Menu";
 import AdminLayout from "../components/layout/AdminLayout";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Register from "../pages/auth/Register";
+import Addresses from "../pages/customer/Addresses";
 
 
 function AppRoutes() {
@@ -33,7 +34,14 @@ function AppRoutes() {
                     }
                 />
 
-                           
+                <Route
+                    path="/addresses"
+                    element={
+                        <ProtectedRoute>
+                            <Addresses />
+                        </ProtectedRoute>
+                    }
+                />                           
                 <Route
                     element={
                         <ProtectedRoute>
