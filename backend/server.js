@@ -6,9 +6,13 @@ const menuRoutes = require("./src/routes/menuRoutes");
 
 const addressRoutes = require("./src/routes/addressRoutes");
 
+const orderRoutes = require("./src/routes/orderRoutes");
+
 app.use("/api/menu", menuRoutes);
 
 app.use("/api/addresses", addressRoutes);
+
+app.use("/api/orders", orderRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en puerto ${PORT}`);

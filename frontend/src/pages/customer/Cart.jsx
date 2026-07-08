@@ -17,6 +17,8 @@ import {
     clearCart
 } from "../../services/cartService";
 
+import { createOrder } from "../../services/orderService";
+
 import "../../styles/customer.css";
 
 function Cart() {
@@ -71,11 +73,54 @@ function Cart() {
 
     }
 
-    function handlePlaceOrder() {
-
-        alert("OR-48");
-
+    async function handlePlaceOrder() {
+    if (cart.length === 0) {
+        alert("El carrito está vacío.");
+        return;
     }
+
+    if (orderType === "delivery" && !selectedAddress) {
+        alert("Debes seleccionar una dirección de entrega.");
+        return;
+    }
+
+    const orderData = {
+        id_tipo_pedido:
+            orderType === "delivery"
+                ? 1
+                : orderType === "pickup"
+                ? 2
+                : 3,
+
+        id_direccion:
+            orderType === "delivery"
+                ? selectedAddress
+                : null,
+
+        total,
+
+        observacion: "",
+
+        items: cart.map((item) => ({
+            id_producto: item.id_producto,
+            cantidad: item.cantidad,
+            precio_unitario: Number(item.precio),
+            subtotal: Number(item.precio) * item.cantidad
+        }))
+    };
+
+    try {
+        const response = await createOrder(orderData);
+
+        clearCart();
+        refreshCart();
+
+        alert(`Pedido creado correctamente. N° ${response.id_pedido}`);
+    } catch (error) {
+        console.error(error);
+        alert("No fue posible crear el pedido.");
+    }
+}
 
     const subtotal = getCartTotal(cart);
 
