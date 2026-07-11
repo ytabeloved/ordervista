@@ -1,25 +1,17 @@
 import { Plus } from "lucide-react";
 
-function ProductCard({
-    product,
-    onView,
-    onAddToCart
-}) {
+function ProductCard({ product, onView, onAddToCart }) {
     return (
-        <article className="customer-product-card">
-
-            <div
-                className="customer-product-image"
-                onClick={() => onView?.(product)}
-            >
+        <article
+            className="customer-product-card"
+            onClick={() => onView(product)}
+        >
+            <div className="customer-product-image">
                 {product.imagen ? (
-                    <img
-                        src={product.imagen}
-                        alt={product.nombre}
-                    />
+                    <img src={product.imagen} alt={product.nombre} />
                 ) : (
                     <div className="customer-product-placeholder">
-                        Sin imagen
+                        {product.nombre}
                     </div>
                 )}
 
@@ -29,41 +21,27 @@ function ProductCard({
             </div>
 
             <div className="customer-product-body">
-
-                <div
-                    className="customer-product-title"
-                    onClick={() => onView?.(product)}
-                >
-
+                <div className="customer-product-title">
                     <h3>{product.nombre}</h3>
-
                     <strong>
-                        $
-                        {Number(product.precio).toLocaleString("es-CL")}
+                        ${Number(product.precio).toLocaleString("es-CL")}
                     </strong>
-
                 </div>
 
-                <p
-                    onClick={() => onView?.(product)}
-                >
-                    {product.descripcion || "Sin descripción"}
-                </p>
+                <p>{product.descripcion || "Sin descripción"}</p>
 
                 <button
                     type="button"
                     className="customer-add-button"
-                    onClick={() => onAddToCart?.(product)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onAddToCart(product);
+                    }}
                 >
-
                     <Plus size={18} />
-
                     Add to Cart
-
                 </button>
-
             </div>
-
         </article>
     );
 }

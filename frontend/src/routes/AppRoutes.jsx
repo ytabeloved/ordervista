@@ -10,6 +10,7 @@ import AdminLayout from "../components/layout/AdminLayout";
 import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Register from "../pages/auth/Register";
 import Addresses from "../pages/customer/Addresses";
+import Orders from "../pages/customer/Orders";
 
 
 function AppRoutes() {
@@ -50,7 +51,15 @@ function AppRoutes() {
                             <Addresses />
                         </ProtectedRoute>
                     }
-                />                           
+                />    
+
+                <Route 
+                    path="/orders" 
+                    element={
+                        <ProtectedRoute>
+                            <Orders />
+                        </ProtectedRoute>} />
+
                 <Route
                     element={
                         <ProtectedRoute>

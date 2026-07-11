@@ -1177,3 +1177,318 @@ a {
     color:#6b7280;
 
 }
+
+.customer-order-card{
+    cursor:pointer;
+}
+
+.customer-order-card:hover{
+    border-color:#2e7d32;
+    box-shadow:0 4px 14px rgba(46,125,50,.10);
+}
+
+.order-detail{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.order-detail-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+}
+
+.order-detail-header > div{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.order-detail-header p{
+    margin:0;
+    color:#6b7280;
+}
+
+.order-detail-section{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.order-detail-section h3{
+    margin:0;
+    font-size:17px;
+}
+
+.order-detail-section p{
+    margin:0;
+    color:#4b6358;
+}
+
+.order-detail-items{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.order-detail-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    padding:14px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    background:#f9fafb;
+}
+
+.order-detail-item p{
+    margin:5px 0 0;
+    color:#6b7280;
+}
+
+.order-detail-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:16px;
+    border-top:1px solid #e5e7eb;
+    font-size:20px;
+}
+
+.order-detail-total strong{
+    color:#087f23;
+}
+
+.customer-orders-page{
+    max-width:960px;
+    margin:0 auto;
+    padding:42px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.customer-orders-header h1{
+    margin:0;
+    font-size:32px;
+    font-weight:800;
+    color:#111827;
+}
+
+.customer-orders-header p{
+    margin:8px 0 0;
+    color:#4b6358;
+    font-size:17px;
+}
+
+.order-status-tabs{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.order-status-tabs button{
+    border:1px solid #e5e7eb;
+    background:#ffffff;
+    color:#4b6358;
+    padding:11px 22px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.order-status-tabs button.active{
+    background:#2e7d32;
+    color:#ffffff;
+    border-color:#2e7d32;
+}
+
+.customer-orders-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.customer-order-card{
+    width:100%;
+    min-height:94px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:22px 20px;
+    display:grid;
+    grid-template-columns:54px 1fr auto;
+    align-items:center;
+    gap:18px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.customer-order-card:hover{
+    border-color:#2e7d32;
+    box-shadow:0 4px 14px rgba(46,125,50,.10);
+}
+
+.customer-order-icon{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.customer-order-icon.pending,
+.customer-order-icon.preparing{
+    background:#fff4dc;
+    color:#ff9800;
+}
+
+.customer-order-icon.ready,
+.customer-order-icon.delivered{
+    background:#e8f5e9;
+    color:#2fb344;
+}
+
+.customer-order-icon.cancelled{
+    background:#ffe8e8;
+    color:#e03131;
+}
+
+.customer-order-main{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.customer-order-title-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.customer-order-title-row h3{
+    margin:0;
+    font-size:17px;
+    font-weight:800;
+    color:#111827;
+}
+
+.customer-order-main p{
+    margin:0;
+    color:#4b6358;
+    font-size:15px;
+}
+
+.customer-order-badge,
+.customer-order-type{
+    padding:5px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.customer-order-badge.pending,
+.customer-order-badge.preparing{
+    background:#fff4dc;
+    color:#ff8a00;
+}
+
+.customer-order-badge.ready,
+.customer-order-badge.delivered{
+    background:#e8f5e9;
+    color:#2fb344;
+}
+
+.customer-order-badge.cancelled{
+    background:#ffe8e8;
+    color:#e03131;
+}
+
+.customer-order-type{
+    background:#f1f8f3;
+    color:#4b6358;
+}
+
+.customer-order-total{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:10px;
+    color:#4b6358;
+}
+
+.customer-order-total strong{
+    font-size:20px;
+    color:#087f23;
+    font-weight:800;
+}
+
+@media (max-width:768px){
+    .customer-orders-page{
+        max-width:100%;
+        padding:36px 18px;
+        gap:20px;
+    }
+
+    .customer-orders-header h1{
+        font-size:28px;
+    }
+
+    .customer-orders-header p{
+        font-size:16px;
+    }
+
+    .order-status-tabs{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:6px;
+    }
+
+    .order-status-tabs button{
+        white-space:nowrap;
+        padding:9px 17px;
+        font-size:13px;
+    }
+
+    .customer-order-card{
+        grid-template-columns:42px 1fr auto;
+        padding:16px;
+        gap:12px;
+        min-height:78px;
+    }
+
+    .customer-order-icon{
+        width:40px;
+        height:40px;
+    }
+
+    .customer-order-title-row{
+        gap:6px;
+    }
+
+    .customer-order-title-row h3{
+        font-size:14px;
+    }
+
+    .customer-order-badge,
+    .customer-order-type{
+        font-size:10px;
+        padding:4px 8px;
+    }
+
+    .customer-order-main p{
+        font-size:12px;
+    }
+
+    .customer-order-total strong{
+        font-size:15px;
+    }
+}

@@ -1,99 +1,56 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Plus } from "lucide-react";
+import { X, Plus } from "lucide-react";
 
-import CustomerLayout from "../../components/customer/CustomerLayout";
-import { getMenu } from "../../services/menuService";
-
-import "../../styles/customer.css";
-
-function ProductDetail() {
-    const { id } = useParams();
-    const navigate = useNavigate();
-
-    const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        async function loadProduct() {
-            try {
-                const data = await getMenu();
-
-                const foundProduct = data.products.find(
-                    (item) => item.id_producto === Number(id)
-                );
-
-                setProduct(foundProduct || null);
-            } catch (error) {
-                console.error(error);
-                alert("No fue posible cargar el producto.");
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        loadProduct();
-    }, [id]);
-
-    if (loading) {
-        return (
-            <CustomerLayout>
-                <p>Cargando producto...</p>
-            </CustomerLayout>
-        );
-    }
-
-    if (!product) {
-        return (
-            <CustomerLayout>
-                <p>Producto no encontrado.</p>
-            </CustomerLayout>
-        );
-    }
+function ProductDetail({ product, onClose, onAddToCart }) {
+    if (!product) return null;
 
     return (
-        <CustomerLayout>
-            <section className="product-detail">
+        <div className="product-detail-overlay">
+            <section className="product-detail-modal">
                 <button
-                    className="product-detail-back"
-                    onClick={() => navigate("/menu")}
+                    type="button"
+                    className="product-detail-close"
+                    onClick={onClose}
                 >
-                    <ArrowLeft size={18} />
-                    Back to menu
+                    <X size={20} />
                 </button>
 
-                <div className="product-detail-card">
-                    <div className="product-detail-image">
-                        {product.imagen ? (
-                            <img src={product.imagen} alt={product.nombre} />
-                        ) : (
-                            <div className="customer-product-placeholder">
-                                Sin imagen
-                            </div>
-                        )}
-                    </div>
+                <div className="product-detail-image">
+                    {product.imagen ? (
+                        <img src={product.imagen} alt={product.nombre} />
+                    ) : (
+                        <div className="customer-product-placeholder">
+                            {product.nombre}
+                        </div>
+                    )}
+                </div>
 
-                    <div className="product-detail-info">
-                        <span className="customer-product-category">
-                            {product.categoria}
-                        </span>
+                <div className="product-detail-info">
+                    <span className="customer-product-category">
+                        {product.categoria}
+                    </span>
 
-                        <h1>{product.nombre}</h1>
+                    <h1>{product.nombre}</h1>
 
-                        <p>{product.descripcion || "Sin descripción"}</p>
+                    <p>{product.descripcion || "Sin descripción"}</p>
 
-                        <strong>
-                            ${Number(product.precio).toLocaleString("es-CL")}
-                        </strong>
+                    <strong>
+                        ${Number(product.precio).toLocaleString("es-CL")}
+                    </strong>
 
-                        <button className="customer-add-button">
-                            <Plus size={18} />
-                            Add to Cart
-                        </button>
-                    </div>
+                    <button
+                        type="button"
+                        className="customer-add-button"
+                        onClick={() => {
+                            onAddToCart(product);
+                            onClose();
+                        }}
+                    >
+                        <Plus size={18} />
+                        Add to Cart
+                    </button>
                 </div>
             </section>
-        </CustomerLayout>
+        </div>
     );
 }
 

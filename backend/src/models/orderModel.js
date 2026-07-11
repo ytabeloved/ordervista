@@ -59,6 +59,91 @@ async function createOrder(userId, order) {
     }
 }
 
+async function getOrdersByUser(userId) {
+    const [rows] = await db.query(
+        `SELECT
+            p.id_pedido,
+            p.id_tipo_pedido,
+            p.id_direccion,
+            p.id_estado,
+            p.fecha_pedido,
+            p.total,
+            p.observacion,
+            d.direccion,
+            d.comuna,
+            d.ciudad,
+            COUNT(dp.id_detalle) AS total_items
+         FROM PEDIDOS p
+         LEFT JOIN DIRECCIONES d ON p.id_direccion = d.id_direccion
+         LEFT JOIN DETALLE_PEDIDO dp ON p.id_pedido = dp.id_pedido
+         WHERE p.id_usuario = ?
+         GROUP BY
+            p.id_pedido,
+            p.id_tipo_pedido,
+            p.id_direccion,
+            p.id_estado,
+            p.fecha_pedido,
+            p.total,
+            p.observacion,
+            d.direccion,
+            d.comuna,
+            d.ciudad
+         ORDER BY p.fecha_pedido DESC`,
+        [userId]
+    );
+
+    return rows;
+}
+
+async function getOrderDetailByUser(userId, orderId) {
+    const [orders] = await db.query(
+        `SELECT
+            p.id_pedido,
+            p.id_tipo_pedido,
+            p.id_direccion,
+            p.id_estado,
+            p.fecha_pedido,
+            p.total,
+            p.observacion,
+            d.direccion,
+            d.comuna,
+            d.ciudad
+         FROM PEDIDOS p
+         LEFT JOIN DIRECCIONES d ON p.id_direccion = d.id_direccion
+         WHERE p.id_pedido = ?
+           AND p.id_usuario = ?`,
+        [orderId, userId]
+    );
+
+    if (orders.length === 0) {
+        return null;
+    }
+
+    const [items] = await db.query(
+        `SELECT
+            dp.id_detalle,
+            dp.id_producto,
+            pr.nombre,
+            pr.descripcion,
+            pr.imagen,
+            dp.cantidad,
+            dp.precio_unitario,
+            dp.subtotal
+         FROM DETALLE_PEDIDO dp
+         INNER JOIN PRODUCTOS pr ON dp.id_producto = pr.id_producto
+         WHERE dp.id_pedido = ?
+         ORDER BY dp.id_detalle ASC`,
+        [orderId]
+    );
+
+    return {
+        ...orders[0],
+        items
+    };
+}
+
 module.exports = {
-    createOrder
+    createOrder,
+    getOrdersByUser,
+    getOrderDetailByUser
 };

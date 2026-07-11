@@ -4,10 +4,26 @@ const { verifyToken } = require("../middleware/authMiddleware");
 const authorizeRoles = require("../middleware/roleMiddleware");
 
 const {
-    createOrder
+    createOrder,
+    getOrders,
+    getOrderDetail
 } = require("../controllers/orderController");
 
 const router = express.Router();
+
+router.get(
+    "/",
+    verifyToken,
+    authorizeRoles(3),
+    getOrders
+);
+
+router.get(
+    "/:id",
+    verifyToken,
+    authorizeRoles(3),
+    getOrderDetail
+);
 
 router.post(
     "/",
