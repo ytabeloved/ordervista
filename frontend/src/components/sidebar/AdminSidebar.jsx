@@ -14,7 +14,8 @@ import {
     ChevronLeft,
     ClipboardList,
     ChefHat,
-    ReceiptText
+    ReceiptText,
+    PlusCircle
 } from "lucide-react";
 
 function AdminSidebar({
@@ -88,6 +89,11 @@ function AdminSidebar({
             to: "/receipts",
             icon: <ReceiptText size={20} />,
             label: "Receipt"
+        },
+        {
+            to: "/operator/new-order",
+            icon: <PlusCircle size={20} />,
+            label: "New Order"
         }
     ];
 

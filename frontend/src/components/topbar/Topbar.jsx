@@ -29,6 +29,10 @@ function TopBar() {
             title: "Operator Panel",
             subtitle: "Gestión operativa de pedidos."
         },
+        "/operator/new-order": {
+            title: "New Order",
+            subtitle: "Crear un nuevo pedido."
+        },
         "/kitchen": {
             title: "Kitchen",
             subtitle: "Gestión de comandas de cocina."

@@ -12,6 +12,7 @@ import Register from "../pages/auth/Register";
 import Addresses from "../pages/customer/Addresses";
 import Orders from "../pages/customer/Orders";
 import OrderManagement from "../pages/operator/OrderManagement";
+import CreateInPersonOrder from "../pages/operator/CreateInPersonOrder";
 
 
 function AppRoutes() {
@@ -78,6 +79,7 @@ function AppRoutes() {
                     <Route path="/categorias" element={<Categories />} />
                     <Route path="/productos" element={<Products />} />
                     <Route path="/operator" element={<OrderManagement />} />
+                    <Route path="/operator/new-order" element={<CreateInPersonOrder />} />
                   
                     
                     
