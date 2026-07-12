@@ -8,6 +8,8 @@ import OrderTypeSelector from "../../components/customer/OrderTypeSelector";
 
 import AddressSelector from "../../components/customer/AddressSelector";
 
+import { getOrderTypes } from "../../services/orderTypeService";
+
 import {
     getCart,
     getCartTotal,
@@ -25,12 +27,29 @@ function Cart() {
 
     const [cart, setCart] = useState([]);
 
-    const [orderType, setOrderType] = useState("delivery");
+    const [orderTypes, setOrderTypes] = useState([]);
+    const [orderType, setOrderType] = useState(null);
+    const [orderTypeId, setOrderTypeId] = useState(null);
 
     const [selectedAddress, setSelectedAddress] = useState(null);
 
+    async function loadOrderTypes() {
+    try {
+        const data = await getOrderTypes();
+        setOrderTypes(data);
+
+        if (data.length > 0) {
+            setOrderTypeId(data[0].id_tipo_pedido);
+        }
+    } catch (error) {
+        console.error(error);
+        alert("No fue posible cargar los tipos de pedido.");
+    }
+}
+
     useEffect(() => {
 
+        loadOrderTypes();
         refreshCart();
 
     }, []);
@@ -73,29 +92,29 @@ function Cart() {
 
     }
 
+    const selectedOrderType = orderTypes.find(
+        (type) => type.id_tipo_pedido === orderTypeId
+    );
+
+    const isDelivery =
+        selectedOrderType?.nombre?.toLowerCase().includes("delivery") ||
+        selectedOrderType?.nombre?.toLowerCase().includes("entrega");
+
     async function handlePlaceOrder() {
     if (cart.length === 0) {
         alert("El carrito está vacío.");
         return;
     }
 
-    if (orderType === "delivery" && !selectedAddress) {
+    if (orderType === isDelivery && !selectedAddress) {
         alert("Debes seleccionar una dirección de entrega.");
         return;
     }
 
     const orderData = {
-        id_tipo_pedido:
-            orderType === "delivery"
-                ? 1
-                : orderType === "pickup"
-                ? 2
-                : 3,
+        id_tipo_pedido: orderTypeId,
 
-        id_direccion:
-            orderType === "delivery"
-                ? selectedAddress
-                : null,
+        id_direccion: isDelivery ? selectedAddress : null,
 
         total,
 
@@ -192,15 +211,17 @@ function Cart() {
 
                             <OrderTypeSelector
 
-                                orderType={orderType}
+                                orderTypeId={orderTypeId}
 
-                                setOrderType={setOrderType}
+                                setOrderTypeId={setOrderTypeId}
+
+                                orderTypes={orderTypes}
 
                             />
 
                             <AddressSelector
 
-                                orderType={orderType}
+                                orderType={isDelivery ? "delivery" : "pickup"}
 
                                 selectedAddress={selectedAddress}
 

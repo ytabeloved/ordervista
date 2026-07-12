@@ -14,7 +14,7 @@ const {
 const router = express.Router();
 
 // Lista tipos de pedido
-router.get("/", verifyToken, authorizeRoles(1), getOrderTypes);
+router.get("/", verifyToken, authorizeRoles(1,2,3), getOrderTypes);
 
 // Tipo de pedido por id
 router.get("/:id", verifyToken, authorizeRoles(1), getOrderTypeById);
