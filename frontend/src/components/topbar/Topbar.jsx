@@ -39,7 +39,7 @@ function TopBar() {
         },
         "/receipts": {
             title: "Receipt",
-            subtitle: "Gestión de comprobantes."
+            subtitle: "Genera comprobantes operativos de pedidos completados."
         }
     };
 

@@ -14,6 +14,7 @@ import Orders from "../pages/customer/Orders";
 import OrderManagement from "../pages/operator/OrderManagement";
 import CreateInPersonOrder from "../pages/operator/CreateInPersonOrder";
 import KitchenCommands from "../pages/operator/KitchenCommands";
+import Receipts from "../pages/operator/Receipts";
 
 
 function AppRoutes() {
@@ -82,6 +83,7 @@ function AppRoutes() {
                     <Route path="/operator" element={<OrderManagement />} />
                     <Route path="/operator/new-order" element={<CreateInPersonOrder />} />
                     <Route path="/kitchen" element={<KitchenCommands />} />
+                    <Route path="/receipts" element={<Receipts />} />
                   
                     
                     
