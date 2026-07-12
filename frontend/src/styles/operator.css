@@ -285,3 +285,12 @@
     color:#d32f2f;
     border-color:#fecaca;
 }
+
+.operator-column-header.cancelled{
+    background:#ffe8e8;
+    color:#d32f2f;
+}
+
+.operator-column-header.cancelled span{
+    background:#d32f2f;
+}

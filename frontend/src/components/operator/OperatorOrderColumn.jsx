@@ -2,7 +2,8 @@ import {
     Clock,
     ChefHat,
     PackageCheck,
-    CheckCircle2
+    CheckCircle2,
+    XCircle
 } from "lucide-react";
 
 import OperatorOrderCard from "./OperatorOrderCard";
@@ -12,7 +13,7 @@ function OperatorOrderColumn({ title, variant, orders, onView, onUpdateStatus })
         if (variant === "new") return <Clock size={20} />;
         if (variant === "preparing") return <ChefHat size={20} />;
         if (variant === "ready") return <PackageCheck size={20} />;
-
+        if (variant === "cancelled") return <XCircle size={20} />;
         return <CheckCircle2 size={20} />;
     }
 

@@ -17,7 +17,8 @@ const columns = [
     { id_estado: 1, title: "New Orders", variant: "new" },
     { id_estado: 2, title: "Preparing", variant: "preparing" },
     { id_estado: 3, title: "Ready", variant: "ready" },
-    { id_estado: 4, title: "Delivered", variant: "delivered" }
+    { id_estado: 4, title: "Delivered", variant: "delivered" },
+    { id_estado: 5, title: "Cancelled", variant: "cancelled" }
 ];
 
 function OrderManagement() {
