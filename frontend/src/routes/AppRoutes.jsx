@@ -11,6 +11,7 @@ import ProtectedRoute from "../components/auth/ProtectedRoute";
 import Register from "../pages/auth/Register";
 import Addresses from "../pages/customer/Addresses";
 import Orders from "../pages/customer/Orders";
+import OrderManagement from "../pages/operator/OrderManagement";
 
 
 function AppRoutes() {
@@ -60,6 +61,9 @@ function AppRoutes() {
                             <Orders />
                         </ProtectedRoute>} />
 
+
+                {/*route for order management for operators*/}
+                
                 <Route
                     element={
                         <ProtectedRoute>
@@ -73,6 +77,7 @@ function AppRoutes() {
                     <Route path="/usuarios" element={<Users />} />
                     <Route path="/categorias" element={<Categories />} />
                     <Route path="/productos" element={<Products />} />
+                    <Route path="/operator" element={<OrderManagement />} />
                   
                     
                     

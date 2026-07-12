@@ -89,9 +89,47 @@ async function getOrderDetail(req, res) {
     }
 }
 
+async function getManagedOrders(req, res) {
+    try {
+        const orders = await orderModel.getAllOrders();
+
+        return res.json(orders);
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            mensaje: "Error al obtener la gestión de pedidos"
+        });
+    }
+}
+
+async function getManagedOrderDetail(req, res) {
+    try {
+        const order = await orderModel.getOrderDetailById(req.params.id);
+
+        if (!order) {
+            return res.status(404).json({
+                mensaje: "Pedido no encontrado"
+            });
+        }
+
+        return res.json(order);
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            mensaje: "Error al obtener el detalle del pedido"
+        });
+    }
+}
+
 module.exports = {
     createOrder,
     createInPersonOrder,
     getOrders,
-    getOrderDetail
+    getOrderDetail,
+    getManagedOrders,
+    getManagedOrderDetail
 };

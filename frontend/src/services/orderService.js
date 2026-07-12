@@ -19,3 +19,13 @@ export async function getOrderDetail(idPedido) {
     const response = await api.get(`/orders/${idPedido}`);
     return response.data;
 }
+
+export async function getManagedOrders() {
+    const response = await api.get("/orders/manage");
+    return response.data;
+}
+
+export async function getManagedOrderDetail(idPedido) {
+    const response = await api.get(`/orders/manage/${idPedido}`);
+    return response.data;
+}

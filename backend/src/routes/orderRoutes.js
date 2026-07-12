@@ -7,7 +7,9 @@ const {
     createOrder,
     createInPersonOrder,
     getOrders,
-    getOrderDetail
+    getOrderDetail,
+    getManagedOrders,
+    getManagedOrderDetail
 } = require("../controllers/orderController");
 
 const router = express.Router();
@@ -17,6 +19,20 @@ router.get(
     verifyToken,
     authorizeRoles(3),
     getOrders
+);
+
+router.get(
+    "/manage",
+    verifyToken,
+    authorizeRoles(1, 2),
+    getManagedOrders
+);
+
+router.get(
+    "/manage/:id",
+    verifyToken,
+    authorizeRoles(1, 2),
+    getManagedOrderDetail
 );
 
 router.post(
