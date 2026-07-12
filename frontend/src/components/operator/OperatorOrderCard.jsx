@@ -1,6 +1,6 @@
 import { getOrderType, formatOrderNumber } from "../../utils/orderHelpers";
 
-function OperatorOrderCard({ order, onView }) {
+function OperatorOrderCard({ order, onView, onUpdateStatus }) {
     const items = order.items_text
         ? order.items_text.split("||")
         : [`${order.total_items} items`];
@@ -14,18 +14,38 @@ function OperatorOrderCard({ order, onView }) {
         return "in-person";
     }
 
-    function getActionLabel() {
-        if (order.id_estado === 1) return "Start Prep";
-        if (order.id_estado === 2) return "Mark Ready";
-        if (order.id_estado === 3) return "Mark Delivered";
+    function getNextStatus() {
+        if (order.id_estado === 1) {
+            return {
+                id_estado: 2,
+                label: "Start Prep"
+            };
+        }
+
+        if (order.id_estado === 2) {
+            return {
+                id_estado: 3,
+                label: "Mark Ready"
+            };
+        }
+
+        if (order.id_estado === 3) {
+            return {
+                id_estado: 4,
+                label: "Mark Delivered"
+            };
+        }
 
         return null;
     }
 
-    const actionLabel = getActionLabel();
+    const nextStatus = getNextStatus();
 
     return (
-        <article className="operator-order-card" onClick={() => onView(order.id_pedido)}>
+        <article
+            className="operator-order-card"
+            onClick={() => onView(order.id_pedido)}
+        >
             <header className="operator-order-card-header">
                 <div>
                     <h3>{formatOrderNumber(order.id_pedido)}</h3>
@@ -50,17 +70,36 @@ function OperatorOrderCard({ order, onView }) {
             <footer className="operator-order-footer">
                 <strong>${Number(order.total).toLocaleString("es-CL")}</strong>
 
-                {actionLabel && (
-                    <button
-                        type="button"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                        }}
-                    >
-                        {actionLabel}
-                        <span>→</span>
-                    </button>
-                )}
+                <div className="operator-order-actions">
+                    {order.id_estado !== 4 && order.id_estado !== 5 && (
+                        <button
+                            type="button"
+                            className="operator-cancel-button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onUpdateStatus(order.id_pedido, 5);
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    )}
+
+                    {nextStatus && (
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onUpdateStatus(
+                                    order.id_pedido,
+                                    nextStatus.id_estado
+                                );
+                            }}
+                        >
+                            {nextStatus.label}
+                            <span>→</span>
+                        </button>
+                    )}
+                </div>
             </footer>
         </article>
     );

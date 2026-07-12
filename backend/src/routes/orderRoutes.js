@@ -9,7 +9,8 @@ const {
     getOrders,
     getOrderDetail,
     getManagedOrders,
-    getManagedOrderDetail
+    getManagedOrderDetail,
+    updateOrderStatus
 } = require("../controllers/orderController");
 
 const router = express.Router();
@@ -33,6 +34,13 @@ router.get(
     verifyToken,
     authorizeRoles(1, 2),
     getManagedOrderDetail
+);
+
+router.patch(
+    "/manage/:id/status",
+    verifyToken,
+    authorizeRoles(1, 2),
+    updateOrderStatus
 );
 
 router.post(

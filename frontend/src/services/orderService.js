@@ -29,3 +29,11 @@ export async function getManagedOrderDetail(idPedido) {
     const response = await api.get(`/orders/manage/${idPedido}`);
     return response.data;
 }
+
+export async function updateManagedOrderStatus(idPedido, idEstado) {
+    const response = await api.patch(`/orders/manage/${idPedido}/status`, {
+        id_estado: idEstado
+    });
+
+    return response.data;
+}

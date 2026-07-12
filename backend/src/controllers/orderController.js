@@ -125,11 +125,46 @@ async function getManagedOrderDetail(req, res) {
     }
 }
 
+async function updateOrderStatus(req, res) {
+    try {
+        const { id_estado } = req.body;
+
+        if (!id_estado || ![1, 2, 3, 4, 5].includes(Number(id_estado))) {
+            return res.status(400).json({
+                mensaje: "Estado de pedido inválido"
+            });
+        }
+
+        const result = await orderModel.updateOrderStatus(
+            req.params.id,
+            Number(id_estado)
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                mensaje: "Pedido no encontrado"
+            });
+        }
+
+        return res.json({
+            mensaje: "Estado del pedido actualizado correctamente"
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            mensaje: "Error al actualizar el estado del pedido"
+        });
+    }
+}
+
 module.exports = {
     createOrder,
     createInPersonOrder,
     getOrders,
     getOrderDetail,
     getManagedOrders,
-    getManagedOrderDetail
+    getManagedOrderDetail,
+    updateOrderStatus
 };

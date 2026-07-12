@@ -239,10 +239,20 @@ async function getOrderDetailById(orderId) {
     };
 }
 
+async function updateOrderStatus(orderId, statusId) {
+    const [result] = await db.query(
+        `UPDATE PEDIDOS SET id_estado = ? WHERE id_pedido = ?`,
+        [statusId, orderId]
+    );
+
+    return result;
+}
+
 module.exports = {
     createOrder,
     getOrdersByUser,
     getOrderDetailByUser,
     getAllOrders,
-    getOrderDetailById
+    getOrderDetailById,
+    updateOrderStatus   
 };

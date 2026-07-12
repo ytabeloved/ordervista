@@ -6,7 +6,8 @@ import OrderDetailModal from "../../components/customer/OrderDetailModal";
 
 import {
     getManagedOrders,
-    getManagedOrderDetail
+    getManagedOrderDetail,
+    updateManagedOrderStatus
 } from "../../services/orderService";
 
 import "../../styles/customer.css";
@@ -32,6 +33,16 @@ function OrderManagement() {
         loadOrders();
     }, []);
 
+    async function handleUpdateStatus(idPedido, idEstado) {
+        try {
+            await updateManagedOrderStatus(idPedido, idEstado);
+            await loadOrders();
+        } catch (error) {
+            console.error(error);
+            alert("No fue posible actualizar el estado del pedido.");
+        }
+    }
+    
     async function loadOrders() {
         setLoading(true);
 
@@ -121,6 +132,7 @@ function OrderManagement() {
                                 (order) => order.id_estado === column.id_estado
                             )}
                             onView={openOrderDetail}
+                            onUpdateStatus={handleUpdateStatus}
                         />
                     ))}
                 </div>

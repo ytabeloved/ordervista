@@ -7,7 +7,7 @@ import {
 
 import OperatorOrderCard from "./OperatorOrderCard";
 
-function OperatorOrderColumn({ title, variant, orders, onView }) {
+function OperatorOrderColumn({ title, variant, orders, onView, onUpdateStatus }) {
     function getIcon() {
         if (variant === "new") return <Clock size={20} />;
         if (variant === "preparing") return <ChefHat size={20} />;
@@ -38,6 +38,7 @@ function OperatorOrderColumn({ title, variant, orders, onView }) {
                             key={order.id_pedido}
                             order={order}
                             onView={onView}
+                            onUpdateStatus={onUpdateStatus}
                         />
                     ))
                 )}
