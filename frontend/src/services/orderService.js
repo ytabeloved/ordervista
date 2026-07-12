@@ -5,6 +5,11 @@ export async function createOrder(orderData) {
     return response.data;
 }
 
+export async function createInPersonOrder(orderData) {
+    const response = await api.post("/orders/in-person", orderData);
+    return response.data;
+}
+
 export async function getOrders() {
     const response = await api.get("/orders");
     return response.data;

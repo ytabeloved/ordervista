@@ -21,6 +21,35 @@ async function createOrder(req, res) {
     }
 }
 
+async function createInPersonOrder(req, res) {
+    try {
+        const orderData = {
+            id_tipo_pedido: 3,
+            id_direccion: null,
+            total: req.body.total,
+            observacion: req.body.observacion || "Pedido presencial",
+            items: req.body.items
+        };
+
+        const idPedido = await orderModel.createOrder(
+            req.user.id_usuario,
+            orderData
+        );
+
+        return res.status(201).json({
+            mensaje: "Pedido presencial creado correctamente",
+            id_pedido: idPedido
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            mensaje: "Error al crear el pedido presencial"
+        });
+    }
+}
+
 async function getOrders(req, res) {
     try {
         const orders = await orderModel.getOrdersByUser(req.user.id_usuario);
@@ -62,6 +91,7 @@ async function getOrderDetail(req, res) {
 
 module.exports = {
     createOrder,
+    createInPersonOrder,
     getOrders,
     getOrderDetail
 };
