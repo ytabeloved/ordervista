@@ -10,6 +10,8 @@ const orderRoutes = require("./src/routes/orderRoutes");
 
 const orderTypeRoutes = require("./src/routes/orderTypeRoutes");
 
+const commandRoutes = require("./src/routes/commandRoutes");
+
 app.use("/api/menu", menuRoutes);
 
 app.use("/api/addresses", addressRoutes);
@@ -17,6 +19,8 @@ app.use("/api/addresses", addressRoutes);
 app.use("/api/order-types", orderTypeRoutes);
 
 app.use("/api/orders", orderRoutes);
+
+app.use("/api/commands", commandRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en puerto ${PORT}`);
