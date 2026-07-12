@@ -1,11 +1,11 @@
-import { Printer, Clock } from "lucide-react";
+import { Printer, Clock, ChefHat } from "lucide-react";
 
 import {
     formatOrderNumber,
     getOrderType
 } from "../../utils/orderHelpers";
 
-function CommandTicketPreview({ command, onPrint }) {
+function CommandTicketPreview({ command, onPrint, onMoveToPreparing }) {
     function getStatusText() {
         if (command.id_estado === 1) return "Pending";
         if (command.id_estado === 2) return "Preparing";
@@ -29,10 +29,23 @@ function CommandTicketPreview({ command, onPrint }) {
             <div className="ticket-preview-header">
                 <h2>Ticket Preview</h2>
 
-                <button type="button" onClick={onPrint}>
-                    <Printer size={18} />
-                    Print Ticket
-                </button>
+                <div className="ticket-preview-actions">
+                    {command.id_estado === 1 && (
+                        <button
+                            type="button"
+                            className="ticket-prep-button"
+                            onClick={() => onMoveToPreparing(command.id_pedido)}
+                        >
+                            <ChefHat size={18} />
+                            Start Prep
+                        </button>
+                    )}
+
+                    <button type="button" onClick={onPrint}>
+                        <Printer size={18} />
+                        Print Ticket
+                    </button>
+                </div>
             </div>
 
             <div id="kitchen-ticket-print" className="kitchen-ticket">
