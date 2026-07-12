@@ -1,8 +1,7 @@
 import axios from "axios";
-import { logout } from "../services/authService";
 
 const api = axios.create({
-    baseURL: "http://localhost:3000/api"
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api"
 });
 
 api.interceptors.request.use((config) => {
@@ -17,10 +16,11 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
     (response) => response,
-
     (error) => {
         if (error.response?.status === 401) {
-            logout();
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            localStorage.removeItem("usuario");
 
             localStorage.setItem(
                 "sessionMessage",
