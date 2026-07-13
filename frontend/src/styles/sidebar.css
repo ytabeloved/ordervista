@@ -1,307 +1,6 @@
 /* ===========================
-   SIDEBAR ADMINISTRADOR
+   LAYOUT ADMIN
 =========================== */
-
-.admin-sidebar{
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 240px;
-    height: 100vh;
-
-    background: #16591f;
-    color: white;
-
-    display: flex;
-    flex-direction: column;
-
-    border-right: 1px solid rgba(255,255,255,.08);
-
-    z-index: 1000;
-
-}
-
-.sidebar-brand{
-
-    display:flex;
-    align-items:center;
-    gap:14px;
-
-    padding:20px;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-
-}
-
-.sidebar-brand-icon{
-
-    width:42px;
-    height:42px;
-
-    background:#2e7d32;
-
-    border-radius:10px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-}
-
-.sidebar-brand-icon img{
-
-    width:24px;
-
-}
-
-.sidebar-brand h2{
-
-    margin:0;
-
-    font-size:18px;
-
-    font-weight:700;
-
-}
-
-.sidebar-brand p{
-
-    margin-top:4px;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-    opacity:.75;
-
-}
-
-/* ===========================
-   MENU
-=========================== */
-
-.sidebar-menu{
-
-    padding:16px 10px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-    flex:1;
-
-}
-
-.sidebar-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    text-decoration:none;
-
-    color:#d9eadb;
-
-    padding:14px 16px;
-
-    border-radius:10px;
-
-    transition:.2s;
-
-}
-
-.sidebar-item:hover{
-
-    background:#2d7b33;
-
-    color:white;
-
-}
-
-.sidebar-item.active{
-
-    background:#2d7b33;
-
-    color:white;
-
-}
-
-.sidebar-item-icon{
-
-    width:22px;
-
-    display:flex;
-
-    justify-content:center;
-
-}
-
-.sidebar-item-label{
-
-    font-size:17px;
-
-}
-
-/* ===========================
-   FOOTER
-=========================== */
-
-.sidebar-footer{
-
-    padding:18px 16px;
-
-    border-top:1px solid rgba(255,255,255,.08);
-
-}
-
-.sidebar-user{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    background:rgba(255,255,255,.06);
-
-    padding:14px;
-
-    border-radius:12px;
-
-    margin-bottom:18px;
-
-}
-
-.sidebar-user-avatar{
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    background:#2e7d32;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-weight:bold;
-
-}
-
-.sidebar-user span{
-
-    display:block;
-
-    font-size:13px;
-
-    opacity:.8;
-
-}
-
-.sidebar-action{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    background:none;
-
-    border:none;
-
-    color:#d9eadb;
-
-    padding:12px 0;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-}
-
-.sidebar-action:hover{
-
-    color:white;
-
-}
-
-.admin-layout {
-    min-height: 100vh;
-    display: flex;
-    background: #f3f8f3;
-}
-
-.admin-main {
-    flex: 1;
-    margin-left: 240px;
-    min-width: 0;
-    padding: 32px;
-}
-
-/* ===========================
-   SIDEBAR COLAPSADO
-=========================== */
-
-.admin-sidebar.collapsed {
-    width: 76px;
-}
-
-.admin-sidebar.collapsed .sidebar-brand {
-    justify-content: center;
-    padding: 20px 10px;
-}
-
-.admin-sidebar.collapsed .sidebar-brand > div:last-child {
-    display: none;
-}
-
-.admin-sidebar.collapsed .sidebar-item {
-    justify-content: center;
-    padding: 14px 0;
-}
-
-.admin-sidebar.collapsed .sidebar-item-label {
-    display: none;
-}
-
-.admin-sidebar.collapsed .sidebar-footer {
-    padding: 18px 10px;
-}
-
-.admin-sidebar.collapsed .sidebar-user {
-    justify-content: center;
-    padding: 10px;
-}
-
-.admin-sidebar.collapsed .sidebar-user div:last-child {
-    display: none;
-}
-
-.admin-sidebar.collapsed .sidebar-action {
-    justify-content: center;
-}
-
-.admin-sidebar.collapsed .sidebar-action span {
-    display: none;
-}
-
-.admin-layout.sidebar-collapsed .admin-main {
-    margin-left: 76px;
-}
 
 .admin-layout{
     min-height:100vh;
@@ -309,185 +8,404 @@
     background:#f3f8f3;
 }
 
-.sidebar{
-    width:220px;
-    min-height:100vh;
-    background:#145c20;
+.admin-main{
+    flex:1;
+    margin-left:240px;
+    min-width:0;
+    transition:margin-left .2s ease;
+}
+
+.admin-layout.sidebar-collapsed .admin-main{
+    margin-left:76px;
+}
+
+.admin-content{
+    padding:28px;
+    overflow:auto;
+}
+
+/* ===========================
+   SIDEBAR ADMINISTRADOR
+=========================== */
+
+.admin-sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:240px;
+    height:100vh;
+    background:#16591f;
     color:#ffffff;
     display:flex;
     flex-direction:column;
-    padding:20px 14px;
+    border-right:1px solid rgba(255,255,255,.08);
+    z-index:1000;
+    overflow:hidden;
+    transition:width .2s ease;
 }
 
 .sidebar-brand{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding-bottom:24px;
-    border-bottom:1px solid rgba(255,255,255,.12);
+    gap:14px;
+    padding:20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    min-height:78px;
 }
 
-.sidebar-logo{
-    width:40px;
-    height:40px;
-    border-radius:10px;
+.sidebar-brand-icon{
+    width:42px;
+    height:42px;
+    min-width:42px;
     background:#2e7d32;
+    border-radius:10px;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
+}
+
+.sidebar-brand-icon img{
+    width:24px;
+    height:24px;
+    display:block;
 }
 
 .sidebar-brand h2{
     margin:0;
-    font-size:16px;
+    font-size:18px;
+    font-weight:700;
+    white-space:nowrap;
 }
 
-.sidebar-brand span{
-    font-size:11px;
-    letter-spacing:.12em;
-    opacity:.8;
+.sidebar-brand p{
+    margin:4px 0 0;
+    font-size:12px;
+    letter-spacing:2px;
+    opacity:.75;
+    white-space:nowrap;
 }
 
-.sidebar-nav{
+/* ===========================
+   MENU
+=========================== */
+
+.sidebar-menu{
+    padding:16px 10px;
     display:flex;
     flex-direction:column;
-    gap:10px;
-    margin-top:24px;
+    gap:6px;
+    flex:1;
 }
 
-.sidebar-link{
+.sidebar-item{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:13px 14px;
-    border-radius:8px;
-    color:#e8f5e9;
+    gap:14px;
     text-decoration:none;
-    font-weight:600;
+    color:#d9eadb;
+    padding:14px 16px;
+    border-radius:10px;
+    transition:.2s;
+    min-height:48px;
 }
 
-.sidebar-link.active,
-.sidebar-link:hover{
-    background:#2e7d32;
+.sidebar-item:hover,
+.sidebar-item.active{
+    background:#2d7b33;
     color:#ffffff;
 }
 
+.sidebar-item-icon{
+    width:22px;
+    min-width:22px;
+    height:22px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.sidebar-item-icon svg,
+.sidebar-item svg{
+    width:20px;
+    height:20px;
+    min-width:20px;
+    display:block;
+}
+
+.sidebar-item-label{
+    font-size:17px;
+    white-space:nowrap;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
 .sidebar-footer{
     margin-top:auto;
+    padding:18px 16px;
+    border-top:1px solid rgba(255,255,255,.08);
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:10px;
 }
 
 .sidebar-user{
     display:flex;
     align-items:center;
-    gap:10px;
-    background:rgba(255,255,255,.10);
-    padding:12px;
-    border-radius:8px;
+    gap:12px;
+    background:rgba(255,255,255,.08);
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:8px;
+    min-height:58px;
 }
 
 .sidebar-user-avatar{
-    width:34px;
-    height:34px;
+    width:42px;
+    height:42px;
+    min-width:42px;
     border-radius:50%;
     background:#2e7d32;
     display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:800;
+    color:#ffffff;
+}
+
+/* Soporte para el componente Avatar existente */
+.sidebar-user .avatar,
+.sidebar-user [class*="avatar"]{
+    display:flex;
     align-items:center;
     justify-content:center;
-    font-weight:800;
+    flex-shrink:0;
 }
 
 .sidebar-user strong{
     display:block;
     font-size:14px;
+    color:#ffffff;
+    white-space:nowrap;
 }
 
+.sidebar-user span,
 .sidebar-user small{
     display:block;
-    font-size:11px;
+    font-size:12px;
     opacity:.8;
+    white-space:nowrap;
 }
 
 .sidebar-action{
-    border:none;
-    background:transparent;
-    color:#e8f5e9;
+    width:100%;
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:8px;
+    gap:12px;
+    background:none;
+    border:none;
+    color:#d9eadb;
+    padding:12px 8px;
     cursor:pointer;
-    font-size:14px;
+    font-size:16px;
+    border-radius:8px;
+    transition:.2s;
 }
 
-.admin-content{
-    flex:1;
-    padding:28px;
-    overflow:auto;
+.sidebar-action:hover{
+    color:#ffffff;
+    background:rgba(255,255,255,.06);
 }
 
-@media (max-width: 900px){
-    .admin-layout{
-        grid-template-columns:72px 1fr;
-    }
+.sidebar-action svg{
+    width:18px;
+    height:18px;
+    min-width:18px;
+}
 
+/* ===========================
+   SIDEBAR COLAPSADO
+=========================== */
+
+.admin-sidebar.collapsed{
+    width:76px;
+}
+
+.admin-sidebar.collapsed .sidebar-brand{
+    justify-content:center;
+    padding:20px 10px;
+}
+
+.admin-sidebar.collapsed .sidebar-brand > div:last-child{
+    display:none;
+}
+
+.admin-sidebar.collapsed .sidebar-menu{
+    align-items:center;
+    padding:16px 8px;
+}
+
+.admin-sidebar.collapsed .sidebar-item{
+    justify-content:center;
+    width:48px;
+    height:48px;
+    padding:0;
+    gap:0;
+}
+
+.admin-sidebar.collapsed .sidebar-item-label{
+    display:none;
+}
+
+.admin-sidebar.collapsed .sidebar-item-icon{
+    width:22px;
+    min-width:22px;
+}
+
+.admin-sidebar.collapsed .sidebar-footer{
+    padding:18px 8px;
+    align-items:center;
+}
+
+.admin-sidebar.collapsed .sidebar-user{
+    justify-content:center;
+    width:48px;
+    height:48px;
+    padding:0;
+    margin-bottom:8px;
+}
+
+.admin-sidebar.collapsed .sidebar-user > div:not(.avatar):not([class*="avatar"]):last-child{
+    display:none;
+}
+
+.admin-sidebar.collapsed .sidebar-user strong,
+.admin-sidebar.collapsed .sidebar-user span,
+.admin-sidebar.collapsed .sidebar-user small{
+    display:none;
+}
+
+.admin-sidebar.collapsed .sidebar-user-avatar,
+.admin-sidebar.collapsed .sidebar-user .avatar,
+.admin-sidebar.collapsed .sidebar-user [class*="avatar"]{
+    display:flex;
+    width:34px;
+    height:34px;
+    min-width:34px;
+}
+
+.admin-sidebar.collapsed .sidebar-action{
+    justify-content:center;
+    width:48px;
+    height:44px;
+    padding:0;
+    gap:0;
+}
+
+.admin-sidebar.collapsed .sidebar-action span{
+    display:none;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width:900px){
     .admin-sidebar{
-        width:72px;
-        min-width:72px;
-        overflow:hidden;
+        width:76px;
     }
 
-    .admin-sidebar .sidebar-brand h2,
-    .admin-sidebar .sidebar-brand p,
-    .admin-sidebar .sidebar-menu span,
-    .admin-sidebar .sidebar-footer span,
-    .admin-sidebar .sidebar-user div,
+    .admin-layout .admin-main{
+        margin-left:76px;
+    }
+
+    .admin-sidebar .sidebar-brand{
+        justify-content:center;
+        padding:20px 10px;
+    }
+
+    .admin-sidebar .sidebar-brand > div:last-child{
+        display:none;
+    }
+
+    .admin-sidebar .sidebar-menu{
+        align-items:center;
+        padding:16px 8px;
+    }
+
+    .admin-sidebar .sidebar-item{
+        justify-content:center;
+        width:48px;
+        height:48px;
+        padding:0;
+        gap:0;
+    }
+
+    .admin-sidebar .sidebar-item-label{
+        display:none;
+    }
+
+    .admin-sidebar .sidebar-item-icon{
+        display:flex;
+        width:22px;
+        min-width:22px;
+    }
+
+    .admin-sidebar .sidebar-item-icon svg,
+    .admin-sidebar .sidebar-item svg{
+        display:block;
+        width:20px;
+        height:20px;
+        min-width:20px;
+    }
+
+    .admin-sidebar .sidebar-footer{
+        padding:18px 8px;
+        align-items:center;
+    }
+
+    .admin-sidebar .sidebar-user{
+        justify-content:center;
+        width:48px;
+        height:48px;
+        padding:0;
+        margin-bottom:8px;
+    }
+
+    .admin-sidebar .sidebar-user > div:not(.avatar):not([class*="avatar"]):last-child{
+        display:none;
+    }
+
+    .admin-sidebar .sidebar-user strong,
+    .admin-sidebar .sidebar-user span,
+    .admin-sidebar .sidebar-user small{
+        display:none;
+    }
+
+    .admin-sidebar .sidebar-user-avatar,
+    .admin-sidebar .sidebar-user .avatar,
+    .admin-sidebar .sidebar-user [class*="avatar"]{
+        display:flex;
+        width:34px;
+        height:34px;
+        min-width:34px;
+    }
+
+    .admin-sidebar .sidebar-action{
+        justify-content:center;
+        width:48px;
+        height:44px;
+        padding:0;
+        gap:0;
+    }
+
     .admin-sidebar .sidebar-action span{
         display:none;
     }
 
-    .sidebar-brand{
-        justify-content:center;
-        padding-left:0;
-        padding-right:0;
-    }
-
-    .sidebar-brand-icon{
-        margin:0 auto;
-    }
-
-    .sidebar-menu{
-        align-items:center;
-    }
-
-    .sidebar-menu a,
-    .sidebar-item{
-        justify-content:center;
-        padding-left:0;
-        padding-right:0;
-    }
-
-    .sidebar-footer{
-        align-items:center;
-        padding-left:8px;
-        padding-right:8px;
-    }
-
-    .sidebar-user{
-        justify-content:center;
-        padding:8px;
-    }
-
-    .sidebar-action{
-        justify-content:center;
-        padding-left:0;
-        padding-right:0;
-    }
-
-    .admin-main{
-        min-width:0;
+    .admin-sidebar .sidebar-action svg{
+        display:block;
     }
 
     .admin-content{
@@ -496,14 +414,34 @@
     }
 }
 
-@media (max-width: 640px){
-    .admin-layout{
-        grid-template-columns:64px 1fr;
-    }
-
+@media (max-width:640px){
     .admin-sidebar{
         width:64px;
-        min-width:64px;
+    }
+
+    .admin-layout .admin-main{
+        margin-left:64px;
+    }
+
+    .admin-sidebar .sidebar-brand-icon{
+        width:38px;
+        height:38px;
+        min-width:38px;
+    }
+
+    .admin-sidebar .sidebar-item{
+        width:44px;
+        height:44px;
+    }
+
+    .admin-sidebar .sidebar-user{
+        width:44px;
+        height:44px;
+    }
+
+    .admin-sidebar .sidebar-action{
+        width:44px;
+        height:42px;
     }
 
     .admin-content{
