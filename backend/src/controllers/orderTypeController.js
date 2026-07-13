@@ -1,4 +1,4 @@
-const orderTypeModel = require("../models/orderTypeModel");
+const orderTypeModel = require("../models/OrderTypeModel");
 
 // Lista todos los tipos de pedido
 async function getOrderTypes(req, res) {
