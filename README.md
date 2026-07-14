@@ -196,6 +196,110 @@ ordervista/
 │
 └── README.md
 
+## 6. Instalación local
+
+### Requisitos previos
+
+- Node.js instalado.
+- npm instalado.
+- MySQL disponible.
+- Git instalado.
+
+---
+
+## 7. Configuración del backend
+
+Entrar a la carpeta backend:
+
+```bash
+cd backend
+```
+
+Instalar dependencias:
+
+```bash
+npm install
+```
+
+Crear archivo `.env`:
+
+```env
+PORT=3000
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=tu_password
+DB_NAME=ordervista
+
+DB_SSL=false
+DB_SSL_REJECT_UNAUTHORIZED=false
+
+JWT_SECRET=tu_clave_secreta
+
+FRONTEND_URL=http://localhost:5173
+```
+
+Ejecutar backend en desarrollo:
+
+```bash
+npm run dev
+```
+
+O ejecutar en modo producción:
+
+```bash
+npm start
+```
+
+Endpoint de verificación:
+
+```http
+GET /api/health
+```
+
+Respuesta esperada:
+
+```json
+{
+  "status": "ok",
+  "message": "OrderVista API running"
+}
+```
+
+---
+
+## 8. Configuración del frontend
+
+Entrar a la carpeta frontend:
+
+```bash
+cd frontend
+```
+
+Instalar dependencias:
+
+```bash
+npm install
+```
+
+Crear o editar archivo `.env`:
+
+```env
+VITE_API_URL=http://localhost:3000/api
+```
+
+Ejecutar frontend en desarrollo:
+
+```bash
+npm run dev
+```
+
+La aplicación quedará disponible normalmente en:
+
+```text
+http://localhost:5173
+```
 
 ---
 
@@ -230,28 +334,30 @@ JWT_SECRET=clave_segura_para_jwt
 FRONTEND_URL=url_del_frontend_en_vercel
 ```
 
-> ⚠️ No se deben subir contraseñas ni claves secretas al repositorio.
+No se deben subir contraseñas ni claves secretas al repositorio.
 
 ---
 
 ## 10. Base de datos
 
-La base de datos utilizada es **MySQL**. En producción se encuentra alojada en **Aiven**.
+La base de datos utilizada es MySQL. En producción se encuentra alojada en Aiven.
 
-### Tablas principales del sistema
+Tablas principales del sistema:
 
-- `ROLES`
-- `USUARIOS`
-- `CATEGORIAS`
-- `PRODUCTOS`
-- `PEDIDOS`
-- `DETALLE_PEDIDO`
-- `ESTADOS_PEDIDO`
-- `TIPOS_PEDIDO`
-- `DIRECCIONES`
-- `COMANDAS`
+```text
+ROLES
+USUARIOS
+CATEGORIAS
+PRODUCTOS
+PEDIDOS
+DETALLE_PEDIDO
+ESTADOS_PEDIDO
+TIPOS_PEDIDO
+DIRECCIONES
+COMANDAS
+```
 
-> ℹ️ En ambientes Linux, como Render, los nombres de tablas son sensibles a mayúsculas y minúsculas. Por este motivo, el proyecto utiliza tablas en mayúsculas.
+En ambientes Linux, como Render, los nombres de tablas son sensibles a mayúsculas y minúsculas. Por este motivo, el proyecto utiliza tablas en mayúsculas.
 
 ---
 
@@ -287,65 +393,69 @@ La base de datos utilizada es **MySQL**. En producción se encuentra alojada en 
 
 ## 12. Rutas principales del frontend
 
-| Ruta | Descripción |
-|---|---|
-| `/login` | Inicio de sesión |
-| `/register` | Registro |
-| `/` | Inicio |
-| `/usuarios` | Gestión de usuarios |
-| `/categorias` | Gestión de categorías |
-| `/productos` | Gestión de productos |
-| `/reportes` | Reportes |
-| `/operator` | Vista operador |
-| `/operator/new-order` | Nuevo pedido presencial |
-| `/kitchen` | Cocina |
-| `/receipts` | Comprobantes |
-| `/menu` | Menú cliente |
-| `/cart` | Carrito |
-| `/addresses` | Direcciones |
+```text
+/login
+/register
+/
+/usuarios
+/categorias
+/productos
+/reportes
+/operator
+/operator/new-order
+/kitchen
+/receipts
+/menu
+/cart
+/addresses
+```
 
 ---
 
 ## 13. Rutas principales del backend
 
-| Ruta | Descripción |
-|---|---|
-| `/api/health` | Verificación del servicio |
-| `/api/auth` | Autenticación |
-| `/api/users` | Usuarios |
-| `/api/categories` | Categorías |
-| `/api/products` | Productos |
-| `/api/menu` | Menú |
-| `/api/orders` | Pedidos |
-| `/api/order-types` | Tipos de pedido |
-| `/api/addresses` | Direcciones |
-| `/api/commands` | Comandas |
-| `/api/reports` | Reportes |
+```text
+/api/health
+/api/auth
+/api/users
+/api/categories
+/api/products
+/api/menu
+/api/orders
+/api/order-types
+/api/addresses
+/api/commands
+/api/reports
+```
 
 ---
 
 ## 14. Diseño responsive
 
-La interfaz fue optimizada para distintos tamaños de pantalla: **escritorio**, **tablet** y **celular**.
+La interfaz fue optimizada para distintos tamaños de pantalla:
+
+- Escritorio.
+- Tablet.
+- Celular.
 
 Se realizaron ajustes responsive en:
 
-- Sidebar administrativo
-- Topbar
-- Login
-- Registro
-- Usuarios
-- Categorías
-- Productos
-- Dashboard
-- Reportes
-- Vista cliente
-- Vista operador
-- Comandas
-- Comprobantes
-- Modales
+- Sidebar administrativo.
+- Topbar.
+- Login.
+- Registro.
+- Usuarios.
+- Categorías.
+- Productos.
+- Dashboard.
+- Reportes.
+- Vista cliente.
+- Vista operador.
+- Comandas.
+- Comprobantes.
+- Modales.
 
-> El objetivo fue mantener la información crítica visible en dispositivos pequeños, evitando scroll horizontal innecesario en vistas operativas.
+El objetivo fue mantener la información crítica visible en dispositivos pequeños, evitando scroll horizontal innecesario en vistas operativas.
 
 ---
 
@@ -353,15 +463,15 @@ Se realizaron ajustes responsive en:
 
 ### Frontend
 
-El frontend se despliega en **Vercel** desde el repositorio GitHub.
+El frontend se despliega en Vercel desde el repositorio GitHub.
 
 Configuración esperada:
 
-| Parámetro | Valor |
-|---|---|
-| Root Directory | `frontend` |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
+```text
+Root Directory: frontend
+Build Command: npm run build
+Output Directory: dist
+```
 
 Archivo `vercel.json` utilizado para soportar rutas de React Router:
 
@@ -378,19 +488,19 @@ Archivo `vercel.json` utilizado para soportar rutas de React Router:
 
 ### Backend
 
-El backend se despliega en **Render** como Web Service.
+El backend se despliega en Render como Web Service.
 
 Configuración esperada:
 
-| Parámetro | Valor |
-|---|---|
-| Root Directory | `backend` |
-| Build Command | `npm install` |
-| Start Command | `npm start` |
+```text
+Root Directory: backend
+Build Command: npm install
+Start Command: npm start
+```
 
 ### Base de datos
 
-La base de datos se despliega en **Aiven MySQL**, utilizando conexión SSL.
+La base de datos se despliega en Aiven MySQL, utilizando conexión SSL.
 
 ---
 
@@ -412,22 +522,22 @@ En caso de pruebas funcionales, se recomienda:
 
 Casos mínimos de prueba:
 
-- [ ] Verificar backend productivo mediante `/api/health`
-- [ ] Login administrador
-- [ ] Login operador
-- [ ] Login cliente
-- [ ] Crear categoría
-- [ ] Editar categoría
-- [ ] Crear producto
-- [ ] Editar producto
-- [ ] Crear pedido online
-- [ ] Crear pedido presencial
-- [ ] Cambiar estado de pedido
-- [ ] Visualizar comanda
-- [ ] Generar comprobante
-- [ ] Consultar dashboard
-- [ ] Consultar reportes con filtro por fechas
-- [ ] Validar diseño responsive en celular
+1. Verificar backend productivo mediante `/api/health`.
+2. Login administrador.
+3. Login operador.
+4. Login cliente.
+5. Crear categoría.
+6. Editar categoría.
+7. Crear producto.
+8. Editar producto.
+9. Crear pedido online.
+10. Crear pedido presencial.
+11. Cambiar estado de pedido.
+12. Visualizar comanda.
+13. Generar comprobante.
+14. Consultar dashboard.
+15. Consultar reportes con filtro por fechas.
+16. Validar diseño responsive en celular.
 
 ---
 
@@ -435,13 +545,13 @@ Casos mínimos de prueba:
 
 Medidas consideradas:
 
-- Autenticación mediante **JWT**
-- Rutas protegidas por token
-- Separación de permisos por rol
-- Contraseñas manejadas con **hashing**
-- Variables sensibles en archivos `.env`
-- Restricción **CORS** por URL de frontend permitida
-- No exposición de credenciales en el repositorio
+- Autenticación mediante JWT.
+- Rutas protegidas por token.
+- Separación de permisos por rol.
+- Contraseñas manejadas con hashing.
+- Variables sensibles en archivos `.env`.
+- Restricción CORS por URL de frontend permitida.
+- No exposición de credenciales en el repositorio.
 
 ---
 
@@ -449,15 +559,15 @@ Medidas consideradas:
 
 El alcance actual no considera:
 
-- Pago en línea
-- Facturación electrónica
-- Inventario avanzado
-- Aplicación móvil nativa
-- Geolocalización de despacho
-- Integración directa con sistemas POS externos
-- Inteligencia artificial
+- Pago en línea.
+- Facturación electrónica.
+- Inventario avanzado.
+- Aplicación móvil nativa.
+- Geolocalización de despacho.
+- Integración directa con sistemas POS externos.
+- Inteligencia artificial.
 
-> Estas funcionalidades podrían considerarse como mejoras futuras.
+Estas funcionalidades podrían considerarse como mejoras futuras.
 
 ---
 
@@ -465,21 +575,21 @@ El alcance actual no considera:
 
 Posibles mejoras para una segunda etapa:
 
-- Integración con Oracle Simphony
-- Sincronización automática de productos desde POS
-- Envío de pedidos directamente a sistema POS
-- Panel de cocina en tiempo real
-- Notificaciones push
-- Control de inventario
-- Reportes avanzados
-- Auditoría de acciones por usuario
-- App móvil nativa para operadores
+- Integración con Oracle Simphony.
+- Sincronización automática de productos desde POS.
+- Envío de pedidos directamente a sistema POS.
+- Panel de cocina en tiempo real.
+- Notificaciones push.
+- Control de inventario.
+- Reportes avanzados.
+- Auditoría de acciones por usuario.
+- App móvil nativa para operadores.
 
 ---
 
 ## 21. Autor
 
-Proyecto desarrollado por **Karla Vergara** como parte del *Proyecto de Título de Ingeniería en Informática*.
+Proyecto desarrollado por Karla Vergara como parte del Proyecto de Título de Ingeniería en Informática.
 
 ---
 
@@ -487,8 +597,8 @@ Proyecto desarrollado por **Karla Vergara** como parte del *Proyecto de Título 
 
 Proyecto desplegado en ambiente productivo mediante:
 
-- **Frontend** en Vercel
-- **Backend** en Render
-- **Base de datos** en Aiven MySQL
+- Frontend en Vercel.
+- Backend en Render.
+- Base de datos en Aiven MySQL.
 
-**Estado general:** en etapa de validación final, pruebas funcionales, documentación y entrega final.
+Estado general: en etapa de validación final, pruebas funcionales, documentación y entrega final.
