@@ -2123,3 +2123,50 @@ a {
         font-size:16px;
     }
 }
+
+/* ===========================
+   CUSTOMER CART BADGE
+=========================== */
+
+.customer-cart-nav-link{
+    position:relative;
+}
+
+.customer-cart-icon-wrapper{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-width:18px;
+}
+
+.customer-cart-count-badge{
+    position:absolute;
+    top:-9px;
+    right:-11px;
+    min-width:18px;
+    height:18px;
+    padding:0 5px;
+    border-radius:999px;
+    background:#f59e0b;
+    color:#ffffff;
+    font-size:11px;
+    font-weight:800;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,.18);
+    z-index:2;
+}
+
+/* Ajuste para mobile */
+@media (max-width:768px){
+    .customer-cart-count-badge{
+        top:-8px;
+        right:-10px;
+        min-width:17px;
+        height:17px;
+        font-size:10px;
+    }
+}

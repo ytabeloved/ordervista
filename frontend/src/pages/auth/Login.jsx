@@ -106,7 +106,7 @@ function loadDemoUser(role) {
                 onSubmit={handleSubmit}
             >
 
-                <h2>logueese en su cuenta</h2>
+                <h2>Ingrese en su cuenta</h2>
 
                 <label>correo</label>
 
