@@ -94,7 +94,7 @@ function Register() {
                 <input
                     type="email"
                     name="email"
-                    placeholder="you@example.com"
+                    placeholder="tucorreo@example.com"
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -103,7 +103,7 @@ function Register() {
                 <label>Numero de telefono</label>
                 <input
                     name="telefono"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+56 9 000-00000"
                     value={formData.telefono}
                     onChange={handleChange}
                 />
@@ -112,7 +112,7 @@ function Register() {
                 <input
                     type="password"
                     name="password"
-                    placeholder="At least 6 characters"
+                    placeholder="minimo 6 caracteres"
                     value={formData.password}
                     onChange={handleChange}
                     minLength={6}
@@ -123,7 +123,7 @@ function Register() {
                 <input
                     type="password"
                     name="confirmPassword"
-                    placeholder="Repeat your password"
+                    placeholder="Repita su password"
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     minLength={6}

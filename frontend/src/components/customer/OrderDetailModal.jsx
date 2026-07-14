@@ -37,7 +37,7 @@ function OrderDetailModal({ order, loading, onClose }) {
 
                     {order.direccion && (
                         <div className="order-detail-section">
-                            <h3>Delivery Address</h3>
+                            <h3>Direeccion de despacho</h3>
                             <p>
                                 {order.direccion}, {order.comuna}, {order.ciudad}
                             </p>
@@ -46,7 +46,7 @@ function OrderDetailModal({ order, loading, onClose }) {
 
                     {order.observacion && (
                         <div className="order-detail-section">
-                            <h3>Observation</h3>
+                            <h3>Observacion</h3>
                             <p>{order.observacion}</p>
                         </div>
                     )}

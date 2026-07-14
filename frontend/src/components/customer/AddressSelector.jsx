@@ -65,7 +65,7 @@ function AddressSelector({
 
             <h2>
 
-                Delivery Address
+                Direccion de despacho
 
             </h2>
 

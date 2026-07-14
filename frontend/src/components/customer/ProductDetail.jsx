@@ -46,7 +46,7 @@ function ProductDetail({ product, onClose, onAddToCart }) {
                         }}
                     >
                         <Plus size={18} />
-                        Add to Cart
+                        Agregar al carrito
                     </button>
                 </div>
             </section>

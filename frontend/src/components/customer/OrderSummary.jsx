@@ -11,7 +11,7 @@ function OrderSummary({
 
         <aside className="cart-summary">
 
-            <h2>Order Summary</h2>
+            <h2>Resumen del Pedido</h2>
 
             <div className="summary-row">
 
@@ -25,7 +25,7 @@ function OrderSummary({
 
             <div className="summary-row">
 
-                <span>Delivery</span>
+                <span>Despacho</span>
 
                 <span>
                     ${delivery.toLocaleString("es-CL")}
@@ -35,7 +35,7 @@ function OrderSummary({
 
             <div className="summary-row">
 
-                <span>Tax</span>
+                <span>Impuesto</span>
 
                 <span>
 
@@ -67,7 +67,7 @@ function OrderSummary({
                 onClick={onPlaceOrder}
             >
 
-                Place Order
+                Reealizar el pedido
 
             </button>
 
@@ -77,7 +77,7 @@ function OrderSummary({
                 onClick={onClearCart}
             >
 
-                Clear Cart
+                Limmpiar el carrito
 
             </button>
 

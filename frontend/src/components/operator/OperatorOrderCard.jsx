@@ -18,21 +18,21 @@ function OperatorOrderCard({ order, onView, onUpdateStatus }) {
         if (order.id_estado === 1) {
             return {
                 id_estado: 2,
-                label: "Start Prep"
+                label: "Comenzar Preparación"
             };
         }
 
         if (order.id_estado === 2) {
             return {
                 id_estado: 3,
-                label: "Mark Ready"
+                label: "Marcar como Listo"
             };
         }
 
         if (order.id_estado === 3) {
             return {
                 id_estado: 4,
-                label: "Mark Delivered"
+                label: "Marcar como Entregado"
             };
         }
 

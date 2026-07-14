@@ -1,10 +1,10 @@
 const tabs = [
-    { key: "all", label: "All Orders" },
-    { key: 1, label: "Pending" },
-    { key: 2, label: "Preparing" },
-    { key: 3, label: "Ready" },
-    { key: 4, label: "Delivered" },
-    { key: 5, label: "Cancelled" }
+    { key: "Todos", label: "Todos los pedidos" },
+    { key: 1, label: "Pendiente" },
+    { key: 2, label: "Preparando" },
+    { key: 3, label: "Listo" },
+    { key: 4, label: "Entregado" },
+    { key: 5, label: "Cancelado" }
 ];
 
 function OrderStatusTabs({ selectedStatus, onChange }) {

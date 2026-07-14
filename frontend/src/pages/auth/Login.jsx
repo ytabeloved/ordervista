@@ -112,7 +112,7 @@ function loadDemoUser(role) {
 
                 <input
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="tucorreo@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />

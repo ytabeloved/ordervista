@@ -7,11 +7,11 @@ function CommandCard({ command, onView }) {
         : [`${command.total_items} productos`];
 
     function getStatusText() {
-        if (command.id_estado === 1) return "New";
-        if (command.id_estado === 2) return "Preparing";
-        if (command.id_estado === 3) return "Ready";
-        if (command.id_estado === 4) return "Delivered";
-        if (command.id_estado === 5) return "Cancelled";
+        if (command.id_estado === 1) return "Nuevo";
+        if (command.id_estado === 2) return "Preparando";
+        if (command.id_estado === 3) return "Listo";
+        if (command.id_estado === 4) return "Entregado";
+        if (command.id_estado === 5) return "Cancelado";
 
         return "New";
     }

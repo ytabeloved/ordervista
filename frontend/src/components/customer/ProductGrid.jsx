@@ -24,8 +24,8 @@ function ProductGrid({
     if (filteredProducts.length === 0) {
         return (
             <div className="customer-empty-state">
-                <h3>No products found</h3>
-                <p>Try another category or search term.</p>
+                <h3>No se encontraron productos</h3>
+                <p>Intenta con otra categoría o término de búsqueda.</p>
             </div>
         );
     }

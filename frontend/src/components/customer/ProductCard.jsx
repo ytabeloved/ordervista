@@ -39,7 +39,7 @@ function ProductCard({ product, onView, onAddToCart }) {
                     }}
                 >
                     <Plus size={18} />
-                    Add to Cart
+                    Agregar al carrito
                 </button>
             </div>
         </article>

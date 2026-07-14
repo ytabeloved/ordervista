@@ -543,3 +543,63 @@
         padding:14px 10px;
     }
 }
+
+/* ===========================
+   SIDEBAR WIDTH LOCK FIX
+   Evita que el sidebar cambie visualmente al hacer scroll
+=========================== */
+
+.admin-sidebar{
+    box-sizing:border-box;
+    flex:0 0 240px;
+    min-width:240px;
+    max-width:240px;
+    overflow:hidden;
+}
+
+.admin-sidebar.collapsed{
+    flex:0 0 76px;
+    min-width:76px;
+    max-width:76px;
+}
+
+/* Evita que aparezca scrollbar interno que ensancha visualmente el menú */
+.sidebar-menu{
+    overflow-y:auto;
+    overflow-x:hidden;
+    scrollbar-width:none;
+}
+
+.sidebar-menu::-webkit-scrollbar{
+    width:0;
+    height:0;
+    display:none;
+}
+
+/* Lock de ancho responsive */
+@media (max-width:900px){
+    .admin-sidebar{
+        flex:0 0 76px;
+        min-width:76px;
+        max-width:76px;
+        width:76px;
+    }
+}
+
+@media (max-width:640px){
+    .admin-sidebar{
+        flex:0 0 64px;
+        min-width:64px;
+        max-width:64px;
+        width:64px;
+    }
+}
+
+@media (max-width:420px){
+    .admin-sidebar{
+        flex:0 0 58px;
+        min-width:58px;
+        max-width:58px;
+        width:58px;
+    }
+}

@@ -5,7 +5,7 @@ function OrderTypeSelector({
 }) {
     return (
         <section className="checkout-options">
-            <h2>Order Type</h2>
+            <h2>Tipo de Pedido</h2>
 
             <div className="order-type-group">
                 {orderTypes.map((type) => (

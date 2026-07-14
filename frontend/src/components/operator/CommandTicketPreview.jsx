@@ -27,7 +27,7 @@ function CommandTicketPreview({ command, onPrint, onMoveToPreparing }) {
     return (
         <section className="ticket-preview-wrapper">
             <div className="ticket-preview-header">
-                <h2>Ticket Preview</h2>
+                <h2>vista previa del ticket</h2>
 
                 <div className="ticket-preview-actions">
                     {command.id_estado === 1 && (
@@ -37,40 +37,40 @@ function CommandTicketPreview({ command, onPrint, onMoveToPreparing }) {
                             onClick={() => onMoveToPreparing(command.id_pedido)}
                         >
                             <ChefHat size={18} />
-                            Start Prep
+                            Comenzar Preparación
                         </button>
                     )}
 
                     <button type="button" onClick={onPrint}>
                         <Printer size={18} />
-                        Print Ticket
+                        Imprimir Ticket
                     </button>
                 </div>
             </div>
 
             <div id="kitchen-ticket-print" className="kitchen-ticket">
-                <h1>KITCHEN TICKET</h1>
+                <h1>TICKET DE LA COCINA</h1>
                 <h2>OrderVista</h2>
 
                 <hr />
 
                 <div className="ticket-row">
-                    <span>Order #</span>
+                    <span>Pedido #</span>
                     <strong>{formatOrderNumber(command.id_pedido)}</strong>
                 </div>
 
                 <div className="ticket-row">
-                    <span>Customer</span>
+                    <span>Cliente</span>
                     <strong>{command.cliente_nombre || command.cliente_email || "Cliente"}</strong>
                 </div>
 
                 <div className="ticket-row">
-                    <span>Type</span>
+                    <span>Tipo</span>
                     <strong>{getOrderType(command.id_tipo_pedido)}</strong>
                 </div>
 
                 <div className="ticket-row">
-                    <span>Time</span>
+                    <span>Hora</span>
                     <strong>
                         {new Date(command.fecha_generacion).toLocaleTimeString("es-CL", {
                             hour: "2-digit",
@@ -88,7 +88,7 @@ function CommandTicketPreview({ command, onPrint, onMoveToPreparing }) {
 
                 <hr />
 
-                <h3>ITEMS TO PREPARE</h3>
+                <h3>ITEMS PARA PREPARAR </h3>
 
                 <div className="ticket-items">
                     {command.items.map((item) => (

@@ -30,15 +30,15 @@ function TopBar() {
             subtitle: "Gestión operativa de pedidos."
         },
         "/operator/new-order": {
-            title: "New Order",
+            title: "Nuevo Pedido",
             subtitle: "Crear un nuevo pedido."
         },
         "/kitchen": {
-            title: "Kitchen",
+            title: "Cocina",
             subtitle: "Gestión de comandas de cocina."
         },
         "/receipts": {
-            title: "Receipt",
+            title: "Comprobantes",
             subtitle: "Genera comprobantes operativos de pedidos completados."
         }
     };

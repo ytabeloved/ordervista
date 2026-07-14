@@ -16,9 +16,9 @@ function ProductTable({ products, onEdit, onDelete }) {
                 <table className="products-table">
                     <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Category</th>
-                            <th>Price</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
                             <th>Stock</th>
                             <th>Status</th>
                             <th>Actions</th>

@@ -2,11 +2,11 @@ import { formatOrderNumber } from "../../utils/orderHelpers";
 
 function CommandListItem({ command, selected, onClick }) {
     function getStatusText() {
-        if (command.id_estado === 1) return "Pending";
-        if (command.id_estado === 2) return "Preparing";
-        if (command.id_estado === 3) return "Ready";
-        if (command.id_estado === 4) return "Delivered";
-        if (command.id_estado === 5) return "Cancelled";
+        if (command.id_estado === 1) return "Pendiente";
+        if (command.id_estado === 2) return "Preparando";
+        if (command.id_estado === 3) return "Listo";
+        if (command.id_estado === 4) return "Entregado";
+        if (command.id_estado === 5) return "Cancelado";
 
         return "Pending";
     }

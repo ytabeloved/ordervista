@@ -26,7 +26,7 @@ function ReceiptPreview({
     return (
         <section className="receipt-preview-wrapper">
             <div className="receipt-preview-header">
-                <h2>Receipt Preview</h2>
+                <h2>Vista previa del comprobante</h2>
 
                 <button
                     type="button"
@@ -34,7 +34,7 @@ function ReceiptPreview({
                     disabled={!isPaid}
                 >
                     <Printer size={18} />
-                    Print Receipt
+                    Imprimir Comprobante
                 </button>
             </div>
 
@@ -47,24 +47,24 @@ function ReceiptPreview({
                 <hr />
 
                 <div className="receipt-row">
-                    <span>Receipt #</span>
+                    <span>Comprobante #</span>
                     <strong>{formatOrderNumber(order.id_pedido)}</strong>
                 </div>
 
                 <div className="receipt-row">
-                    <span>Date</span>
+                    <span>Fecha</span>
                     <strong>
                         {new Date(order.fecha_pedido).toLocaleDateString("es-CL")}
                     </strong>
                 </div>
 
                 <div className="receipt-row">
-                    <span>Customer</span>
+                    <span>Cliente</span>
                     <strong>{order.cliente_nombre || order.cliente_email || "Cliente"}</strong>
                 </div>
 
                 <div className="receipt-row">
-                    <span>Order Type</span>
+                    <span>Tipo de Pedido</span>
                     <strong>{getOrderType(order.id_tipo_pedido)}</strong>
                 </div>
 
@@ -96,7 +96,7 @@ function ReceiptPreview({
                 <hr />
 
                 <div className="receipt-payment-box">
-                    <h3>PAYMENT METHOD</h3>
+                    <h3>MÉTODO DE PAGO</h3>
 
                     {isPaid ? (
                         <>
@@ -104,7 +104,7 @@ function ReceiptPreview({
 
                             <div className="receipt-payment-received">
                                 <CheckCircle2 size={18} />
-                                PAYMENT RECEIVED
+                                PAGO RECIBIDO
                             </div>
 
                             <small>
