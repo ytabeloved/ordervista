@@ -1492,3 +1492,634 @@ a {
         font-size:15px;
     }
 }
+
+/* ==================================
+   CUSTOMER RESPONSIVE FIXES
+   Menu / Cart / Addresses / Orders
+================================== */
+
+.customer-layout,
+.customer-main,
+.customer-menu,
+.customer-cart,
+.customer-addresses,
+.customer-orders-page{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+.customer-main{
+    min-width:0;
+}
+
+/* ===========================
+   NAVBAR CUSTOMER RESPONSIVE
+=========================== */
+
+.customer-navbar{
+    width:100%;
+}
+
+.customer-navbar-left,
+.customer-navbar-right{
+    flex-shrink:0;
+}
+
+.customer-navbar-menu{
+    min-width:0;
+}
+
+.customer-navbar-menu a{
+    flex-shrink:0;
+}
+
+.customer-navbar-menu::-webkit-scrollbar,
+.category-tabs::-webkit-scrollbar,
+.order-status-tabs::-webkit-scrollbar{
+    height:4px;
+}
+
+.customer-navbar-menu::-webkit-scrollbar-thumb,
+.category-tabs::-webkit-scrollbar-thumb,
+.order-status-tabs::-webkit-scrollbar-thumb{
+    background:#cfd8d0;
+    border-radius:999px;
+}
+
+/* ===========================
+   MENU / PRODUCTS RESPONSIVE
+=========================== */
+
+.customer-menu-header{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.customer-search{
+    width:100%;
+    max-width:460px;
+}
+
+.product-grid{
+    grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+.customer-product-card{
+    min-width:0;
+}
+
+.customer-product-title{
+    min-width:0;
+}
+
+.customer-product-title h3{
+    min-width:0;
+    overflow-wrap:anywhere;
+}
+
+.customer-product-title strong{
+    flex-shrink:0;
+}
+
+/* ===========================
+   PRODUCT MODAL RESPONSIVE
+=========================== */
+
+.product-detail-overlay{
+    padding:16px;
+}
+
+.product-detail-modal{
+    max-width:900px;
+    max-height:92vh;
+}
+
+.product-detail-info{
+    min-width:0;
+}
+
+.product-detail-info h1,
+.product-detail-info p{
+    overflow-wrap:anywhere;
+}
+
+/* ===========================
+   CART RESPONSIVE
+=========================== */
+
+.cart-layout{
+    width:100%;
+    min-width:0;
+}
+
+.cart-list{
+    min-width:0;
+}
+
+.cart-item{
+    min-width:0;
+}
+
+.cart-item img{
+    flex-shrink:0;
+}
+
+.cart-info{
+    min-width:0;
+}
+
+.cart-info h3,
+.cart-info p{
+    overflow-wrap:anywhere;
+}
+
+.cart-summary{
+    width:100%;
+    min-width:0;
+}
+
+.checkout-options{
+    width:100%;
+}
+
+.order-type-group{
+    width:100%;
+}
+
+.order-type-option{
+    min-width:0;
+}
+
+.address-selector{
+    width:100%;
+}
+
+.address-option{
+    min-width:0;
+}
+
+.address-option div{
+    min-width:0;
+}
+
+.address-option strong,
+.address-option p{
+    overflow-wrap:anywhere;
+}
+
+/* ===========================
+   ADDRESSES RESPONSIVE
+=========================== */
+
+.customer-addresses .customer-menu-header{
+    align-items:flex-start;
+}
+
+.address-list{
+    width:100%;
+    min-width:0;
+}
+
+.address-card{
+    min-width:0;
+}
+
+.address-card h3,
+.address-card p,
+.address-card small{
+    overflow-wrap:anywhere;
+}
+
+.address-actions{
+    flex-wrap:wrap;
+}
+
+.address-actions button{
+    min-width:120px;
+}
+
+/* ===========================
+   ORDERS RESPONSIVE
+=========================== */
+
+.customer-orders-page{
+    width:100%;
+}
+
+.customer-orders-list{
+    min-width:0;
+}
+
+.customer-order-card{
+    min-width:0;
+}
+
+.customer-order-main{
+    min-width:0;
+}
+
+.customer-order-title-row{
+    min-width:0;
+}
+
+.customer-order-title-row h3,
+.customer-order-main p{
+    overflow-wrap:anywhere;
+}
+
+.customer-order-total{
+    min-width:max-content;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width:1024px){
+    .customer-main{
+        padding:26px 20px;
+    }
+
+    .cart-layout{
+        grid-template-columns:1fr;
+        gap:24px;
+    }
+
+    .cart-summary{
+        position:static;
+    }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+    .customer-navbar{
+        align-items:flex-start;
+        padding:12px 14px;
+    }
+
+    .customer-navbar-left{
+        max-width:calc(100% - 70px);
+    }
+
+    .customer-brand h2{
+        font-size:18px;
+    }
+
+    .customer-navbar-right{
+        margin-left:auto;
+    }
+
+    .customer-navbar-menu{
+        order:3;
+        width:100%;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        justify-content:flex-start;
+        padding-bottom:6px;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .customer-navbar-menu a{
+        min-width:max-content;
+        padding:9px 14px;
+    }
+
+    .customer-main{
+        padding:20px 14px;
+    }
+
+    .customer-menu,
+    .customer-cart,
+    .customer-addresses{
+        gap:20px;
+    }
+
+    .customer-menu-header h1{
+        font-size:30px;
+    }
+
+    .customer-menu-header p{
+        font-size:15px;
+    }
+
+    .customer-search{
+        max-width:100%;
+    }
+
+    .category-tabs{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:6px;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .category-tabs button{
+        flex-shrink:0;
+        padding:10px 18px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+        gap:16px;
+    }
+
+    .customer-product-image{
+        height:180px;
+    }
+
+    .customer-product-body{
+        padding:16px;
+    }
+
+    .customer-product-title{
+        flex-direction:column;
+        gap:6px;
+    }
+
+    .customer-product-title strong{
+        font-size:17px;
+    }
+
+    .product-detail-modal{
+        grid-template-columns:1fr;
+        width:100%;
+        overflow-y:auto;
+    }
+
+    .product-detail-image{
+        min-height:210px;
+        max-height:260px;
+    }
+
+    .product-detail-info{
+        padding:20px;
+    }
+
+    .product-detail-info h1{
+        font-size:26px;
+    }
+
+    .cart-item{
+        grid-template-columns:74px 1fr 40px;
+        grid-template-areas:
+            "image info delete"
+            "image qty total";
+        align-items:center;
+        gap:12px;
+        padding:14px;
+        text-align:left;
+    }
+
+    .cart-item img{
+        grid-area:image;
+        width:74px;
+        height:74px;
+        margin:0;
+    }
+
+    .cart-info{
+        grid-area:info;
+        align-items:flex-start;
+    }
+
+    .cart-info h3{
+        font-size:16px;
+    }
+
+    .cart-info p{
+        font-size:13px;
+    }
+
+    .cart-quantity{
+        grid-area:qty;
+        justify-content:flex-start;
+    }
+
+    .cart-quantity button{
+        width:32px;
+        height:32px;
+    }
+
+    .cart-item > strong{
+        grid-area:total;
+        font-size:15px;
+        text-align:right;
+    }
+
+    .cart-delete-button{
+        grid-area:delete;
+        width:36px;
+        height:36px;
+        margin:0 0 0 auto;
+    }
+
+    .cart-summary{
+        padding:22px;
+    }
+
+    .cart-summary h2{
+        font-size:22px;
+    }
+
+    .summary-total{
+        font-size:20px;
+    }
+
+    .order-type-group{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:10px;
+    }
+
+    .order-type-option{
+        width:100%;
+        justify-content:flex-start;
+    }
+
+    .address-option{
+        padding:14px;
+    }
+
+    .customer-primary-button{
+        width:100%;
+        justify-content:center;
+    }
+
+    .address-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .address-actions button{
+        width:100%;
+        min-width:0;
+    }
+
+    .customer-orders-page{
+        padding:28px 14px;
+    }
+
+    .order-status-tabs{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:6px;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .order-status-tabs button{
+        flex-shrink:0;
+    }
+
+    .customer-order-card{
+        grid-template-columns:42px 1fr;
+        grid-template-areas:
+            "icon main"
+            "total total";
+        gap:12px;
+        padding:16px;
+    }
+
+    .customer-order-icon{
+        grid-area:icon;
+    }
+
+    .customer-order-main{
+        grid-area:main;
+    }
+
+    .customer-order-total{
+        grid-area:total;
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+        width:100%;
+        min-width:0;
+        padding-top:12px;
+        border-top:1px solid #e5e7eb;
+    }
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media (max-width:480px){
+    .customer-navbar{
+        padding:10px 12px;
+    }
+
+    .customer-brand{
+        gap:10px;
+    }
+
+    .customer-brand img{
+        width:38px;
+        height:38px;
+    }
+
+    .customer-brand h2{
+        font-size:16px;
+    }
+
+    .customer-navbar-menu a{
+        padding:8px 12px;
+        font-size:13px;
+    }
+
+    .customer-main{
+        padding:16px 12px;
+    }
+
+    .customer-menu-header h1{
+        font-size:26px;
+    }
+
+    .customer-empty-state{
+        padding:24px 16px;
+    }
+
+    .customer-product-image{
+        height:160px;
+    }
+
+    .customer-product-body h3{
+        font-size:16px;
+    }
+
+    .customer-add-button,
+    .customer-secondary-button,
+    .customer-primary-button{
+        min-height:42px;
+    }
+
+    .product-detail-overlay{
+        padding:10px;
+    }
+
+    .product-detail-image{
+        min-height:180px;
+        max-height:220px;
+    }
+
+    .product-detail-info{
+        padding:18px;
+    }
+
+    .cart-item{
+        grid-template-columns:64px 1fr 36px;
+        gap:10px;
+        padding:12px;
+    }
+
+    .cart-item img{
+        width:64px;
+        height:64px;
+    }
+
+    .cart-quantity{
+        gap:8px;
+    }
+
+    .cart-quantity button{
+        width:30px;
+        height:30px;
+    }
+
+    .cart-summary{
+        padding:18px;
+    }
+
+    .checkout-options h2{
+        font-size:20px;
+    }
+
+    .address-card{
+        padding:18px;
+    }
+
+    .address-actions{
+        grid-template-columns:1fr;
+    }
+
+    .customer-orders-header h1{
+        font-size:26px;
+    }
+
+    .customer-order-card{
+        padding:14px;
+    }
+
+    .customer-order-total{
+        font-size:13px;
+    }
+
+    .customer-order-total strong{
+        font-size:16px;
+    }
+}

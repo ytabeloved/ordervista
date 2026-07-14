@@ -1,36 +1,405 @@
-.category-mobile-card {
-    background: white;
-    border-radius: 16px;
-    padding: 16px;
-    box-shadow: 0 5px 18px rgba(0,0,0,.06);
+/* ===========================
+   CATEGORIES PAGE
+=========================== */
+
+.categories-page{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
 }
 
-.category-mobile-card h3 {
-    margin: 0;
-    font-size: 16px;
+/* ===========================
+   HEADER
+=========================== */
+
+.categories-page .page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:18px;
+    width:100%;
 }
 
-.category-mobile-card p {
-    margin: 6px 0 0;
-    color: #667466;
-    font-size: 14px;
+.categories-page .page-header-info{
+    min-width:0;
 }
 
-.category-mobile-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 14px;
+.categories-page .page-header-info h1{
+    margin:0;
+    font-size:32px;
+    font-weight:800;
+    color:#111827;
+    line-height:1.15;
 }
 
-.categories-mobile-list {
-    display: none;
+.categories-page .page-header-info p{
+    margin:6px 0 0;
+    color:#667466;
+    font-size:16px;
+    line-height:1.35;
 }
 
-@media (max-width: 768px) {
-    .categories-mobile-list {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
+.categories-page .page-header .btn-primary{
+    flex-shrink:0;
+    min-height:42px;
+    padding:11px 18px;
+    border-radius:10px;
+}
+
+/* ===========================
+   TOOLBAR
+=========================== */
+
+.categories-page .crud-toolbar{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+    width:100%;
+    margin-bottom:0;
+}
+
+.categories-page .search-input{
+    flex:0 1 420px;
+    width:420px;
+    max-width:100%;
+    height:44px;
+    background:#f0f0f2;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 14px;
+    color:#667466;
+}
+
+.categories-page .search-input input{
+    width:100%;
+    min-width:0;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:15px;
+}
+
+.categories-page .crud-filters{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    max-width:100%;
+}
+
+.categories-page .crud-filters button{
+    background:#ffffff;
+    border:1px solid #dfe5df;
+    padding:10px 16px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:800;
+    min-height:40px;
+    white-space:nowrap;
+}
+
+.categories-page .crud-filters button.active{
+    background:#2e7d32;
+    color:#ffffff;
+    border-color:#2e7d32;
+}
+
+/* ===========================
+   DESKTOP TABLE
+=========================== */
+
+.categories-page .users-table-card{
+    background:#ffffff;
+    border-radius:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+    overflow-x:auto;
+    width:100%;
+    max-width:100%;
+    -webkit-overflow-scrolling:touch;
+}
+
+.categories-page .users-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:720px;
+}
+
+.categories-page .users-table th{
+    text-align:left;
+    padding:16px 22px;
+    border-bottom:1px solid #ececec;
+    color:#111827;
+    font-size:14px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.categories-page .users-table td{
+    padding:14px 22px;
+    border-bottom:1px solid #ececec;
+    color:#607064;
+    vertical-align:middle;
+}
+
+.categories-page .users-table td strong{
+    color:#111827;
+}
+
+.categories-page .users-table tr:last-child td{
+    border-bottom:none;
+}
+
+.categories-page .empty-table{
+    padding:24px;
+    color:#667466;
+    text-align:center;
+}
+
+/* ===========================
+   MOBILE LIST
+=========================== */
+
+.categories-mobile-list{
+    display:none;
+}
+
+.category-mobile-card{
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:13px 14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.05);
+    display:grid;
+    grid-template-columns:1fr auto;
+    grid-template-areas:
+        "content actions"
+        "status actions";
+    column-gap:12px;
+    row-gap:8px;
+    align-items:center;
+    min-width:0;
+}
+
+.category-mobile-card > div:first-child,
+.category-mobile-card h3,
+.category-mobile-card p{
+    min-width:0;
+}
+
+.category-mobile-card h3{
+    grid-area:content;
+    margin:0;
+    font-size:15px;
+    font-weight:800;
+    color:#111827;
+    line-height:1.2;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.category-mobile-card p{
+    grid-area:content;
+    margin:20px 0 0;
+    color:#667466;
+    font-size:12px;
+    line-height:1.25;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.category-mobile-footer{
+    grid-column:1 / -1;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:2px;
+}
+
+.category-mobile-footer .badge,
+.category-mobile-footer .status-badge{
+    padding:4px 9px;
+    font-size:11px;
+}
+
+.category-mobile-footer .action-buttons,
+.category-mobile-footer .table-actions{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex-shrink:0;
+}
+
+.category-mobile-footer .icon-button{
+    width:30px;
+    height:30px;
+    margin:0;
+}
+
+.category-mobile-footer .icon-button svg{
+    width:15px;
+    height:15px;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (max-width:900px){
+    .categories-page{
+        gap:18px;
+    }
+
+    .categories-page .page-header{
+        flex-direction:row;
+        align-items:flex-start;
+        justify-content:space-between;
+        gap:12px;
+    }
+
+    .categories-page .page-header-info{
+        flex:1;
+    }
+
+    .categories-page .page-header-info h1{
+        font-size:26px;
+    }
+
+    .categories-page .page-header-info p{
+        font-size:15px;
+    }
+
+    .categories-page .page-header .btn-primary{
+        width:auto;
+        min-width:max-content;
+        padding:10px 14px;
+    }
+
+    .categories-page .crud-toolbar{
+        flex-direction:column;
+        align-items:stretch;
+        gap:10px;
+    }
+
+    .categories-page .search-input{
+        width:100%;
+        flex:none;
+        height:42px;
+    }
+
+    .categories-page .crud-filters{
+        width:100%;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:4px;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:thin;
+    }
+
+    .categories-page .crud-filters button{
+        flex-shrink:0;
+        padding:9px 16px;
+        min-height:38px;
+    }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+    .categories-page{
+        gap:16px;
+    }
+
+    .categories-page .users-table-card{
+        display:none;
+    }
+
+    .categories-mobile-list{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        width:100%;
+    }
+
+    .categories-page .page-header{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+    }
+
+    .categories-page .page-header .btn-primary{
+        width:100%;
+        min-height:40px;
+        padding:9px 12px;
+    }
+
+    .categories-page .crud-toolbar{
+        gap:8px;
+    }
+
+    .categories-page .search-input{
+        height:40px;
+        border-radius:9px;
+    }
+
+    .categories-page .crud-filters{
+        gap:7px;
+    }
+
+    .categories-page .crud-filters button{
+        padding:8px 14px;
+        min-height:36px;
+        font-size:13px;
+    }
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media (max-width:480px){
+    .categories-page{
+        gap:14px;
+    }
+
+    .categories-page .page-header-info h1{
+        font-size:24px;
+    }
+
+    .categories-page .page-header-info p{
+        font-size:14px;
+    }
+
+    .category-mobile-card{
+        padding:12px;
+        border-radius:13px;
+        row-gap:7px;
+    }
+
+    .category-mobile-card h3{
+        font-size:14px;
+    }
+
+    .category-mobile-card p{
+        font-size:11.5px;
+    }
+
+    .category-mobile-footer{
+        margin-top:0;
+    }
+
+    .category-mobile-footer .icon-button{
+        width:28px;
+        height:28px;
     }
 }

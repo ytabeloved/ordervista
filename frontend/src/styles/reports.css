@@ -1,7 +1,14 @@
+/* ===========================
+   REPORTS PAGE
+=========================== */
+
 .reports-page{
     display:flex;
     flex-direction:column;
     gap:26px;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
 }
 
 .reports-header{
@@ -9,6 +16,11 @@
     justify-content:space-between;
     align-items:center;
     gap:20px;
+    width:100%;
+}
+
+.reports-header > div{
+    min-width:0;
 }
 
 .reports-header h1{
@@ -16,12 +28,20 @@
     font-size:32px;
     font-weight:800;
     color:#111827;
+    line-height:1.15;
 }
 
 .reports-header p{
     margin:6px 0 0;
     color:#4b6358;
+    font-size:16px;
+    line-height:1.45;
+    overflow-wrap:anywhere;
 }
+
+/* ===========================
+   DATE FILTER
+=========================== */
 
 .report-date-filter{
     background:#ffffff;
@@ -32,6 +52,9 @@
     align-items:end;
     gap:14px;
     flex-wrap:wrap;
+    width:100%;
+    max-width:100%;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
 }
 
 .report-date-filter label{
@@ -40,24 +63,43 @@
     gap:8px;
     font-weight:700;
     color:#374151;
+    min-width:180px;
+    flex:1 1 180px;
 }
 
 .report-date-filter input{
+    width:100%;
     height:42px;
     border:1px solid #d1d5db;
     border-radius:8px;
     padding:0 12px;
+    color:#111827;
+    background:#ffffff;
+}
+
+.report-date-filter input:focus{
+    outline:none;
+    border-color:#2e7d32;
+    box-shadow:0 0 0 3px rgba(46,125,50,.14);
 }
 
 .report-date-filter button{
     height:42px;
+    min-width:120px;
     border:none;
     background:#2e7d32;
-    color:white;
+    color:#ffffff;
     border-radius:8px;
     padding:0 18px;
     font-weight:800;
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.report-date-filter button:hover{
+    background:#256b2a;
 }
 
 .report-date-filter button.secondary{
@@ -66,13 +108,24 @@
     border:1px solid #d1d5db;
 }
 
+.report-date-filter button.secondary:hover{
+    border-color:#2e7d32;
+    color:#2e7d32;
+}
+
+/* ===========================
+   SUMMARY CARDS
+=========================== */
+
 .report-summary-grid{
     display:grid;
-    grid-template-columns:repeat(4, minmax(180px, 1fr));
+    grid-template-columns:repeat(4, minmax(0, 1fr));
     gap:18px;
+    width:100%;
 }
 
 .report-summary-card{
+    min-width:0;
     background:#ffffff;
     border:1px solid #e5e7eb;
     border-radius:16px;
@@ -86,20 +139,29 @@
 .report-summary-card span{
     color:#4b6358;
     font-weight:700;
+    line-height:1.35;
 }
 
 .report-summary-card strong{
     font-size:28px;
     color:#087f23;
+    line-height:1.1;
+    overflow-wrap:anywhere;
 }
+
+/* ===========================
+   REPORT TABLE CARDS
+=========================== */
 
 .reports-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
     gap:22px;
+    width:100%;
 }
 
 .report-card{
+    min-width:0;
     background:#ffffff;
     border:1px solid #e5e7eb;
     border-radius:16px;
@@ -113,14 +175,41 @@
 .report-card h2{
     margin:0;
     font-size:22px;
+    color:#111827;
+    line-height:1.25;
+    overflow-wrap:anywhere;
+}
+
+.report-card > p{
+    margin:0;
+    padding:22px;
+    border:1px dashed #d1d5db;
+    border-radius:12px;
+    color:#6b7280;
+    text-align:center;
+    line-height:1.45;
 }
 
 .report-table-wrapper{
-    overflow:auto;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+}
+
+.report-table-wrapper::-webkit-scrollbar{
+    height:6px;
+}
+
+.report-table-wrapper::-webkit-scrollbar-thumb{
+    background:#cfd8d0;
+    border-radius:999px;
 }
 
 .report-table{
     width:100%;
+    min-width:560px;
     border-collapse:collapse;
 }
 
@@ -129,12 +218,25 @@
     padding:12px 10px;
     border-bottom:1px solid #e5e7eb;
     text-align:left;
+    vertical-align:middle;
+    white-space:nowrap;
 }
 
 .report-table th{
     color:#4b6358;
     font-size:13px;
     text-transform:uppercase;
+    font-weight:800;
+}
+
+.report-table td{
+    color:#111827;
+}
+
+.report-table td:first-child{
+    max-width:220px;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .report-table td:last-child{
@@ -142,9 +244,13 @@
     color:#087f23;
 }
 
+/* ===========================
+   RESPONSIVE
+=========================== */
+
 @media (max-width:1100px){
     .report-summary-grid{
-        grid-template-columns:repeat(2, 1fr);
+        grid-template-columns:repeat(2, minmax(0, 1fr));
     }
 
     .reports-grid{
@@ -152,8 +258,102 @@
     }
 }
 
-@media (max-width:640px){
+@media (max-width:768px){
+    .reports-page{
+        gap:22px;
+    }
+
+    .reports-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .reports-header h1{
+        font-size:28px;
+    }
+
+    .reports-header p{
+        font-size:15px;
+    }
+
+    .report-date-filter{
+        align-items:stretch;
+        padding:16px;
+    }
+
+    .report-date-filter label{
+        min-width:0;
+        flex:1 1 100%;
+    }
+
+    .report-date-filter button{
+        width:100%;
+    }
+
+    .report-summary-grid{
+        grid-template-columns:1fr 1fr;
+        gap:14px;
+    }
+
+    .report-summary-card{
+        padding:18px;
+    }
+
+    .report-summary-card strong{
+        font-size:24px;
+    }
+
+    .report-card{
+        padding:18px;
+    }
+
+    .report-card h2{
+        font-size:20px;
+    }
+}
+
+@media (max-width:520px){
+    .reports-page{
+        gap:18px;
+    }
+
+    .reports-header h1{
+        font-size:24px;
+    }
+
+    .report-date-filter{
+        padding:14px;
+        border-radius:14px;
+    }
+
     .report-summary-grid{
         grid-template-columns:1fr;
+    }
+
+    .report-summary-card{
+        padding:16px;
+    }
+
+    .report-summary-card strong{
+        font-size:22px;
+    }
+
+    .report-card{
+        padding:16px;
+        border-radius:14px;
+    }
+
+    .report-card h2{
+        font-size:18px;
+    }
+
+    .report-table{
+        min-width:520px;
+    }
+
+    .report-table th,
+    .report-table td{
+        padding:10px 8px;
+        font-size:13px;
     }
 }

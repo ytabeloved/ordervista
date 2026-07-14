@@ -6,26 +6,32 @@
     min-height:100vh;
     display:flex;
     background:#f3f8f3;
+    width:100%;
+    overflow-x:hidden;
 }
 
 .admin-main{
     flex:1;
     margin-left:240px;
+    width:calc(100% - 240px);
     min-width:0;
-    transition:margin-left .2s ease;
+    transition:margin-left .2s ease, width .2s ease;
 }
 
 .admin-layout.sidebar-collapsed .admin-main{
     margin-left:76px;
+    width:calc(100% - 76px);
 }
 
 .admin-content{
+    width:100%;
+    max-width:100%;
     padding:28px;
-    overflow:auto;
+    overflow-x:hidden;
 }
 
 /* ===========================
-   SIDEBAR ADMINISTRADOR
+   SIDEBAR
 =========================== */
 
 .admin-sidebar{
@@ -44,13 +50,18 @@
     transition:width .2s ease;
 }
 
+/* ===========================
+   BRAND
+=========================== */
+
 .sidebar-brand{
+    min-height:78px;
+    padding:20px;
     display:flex;
     align-items:center;
     gap:14px;
-    padding:20px;
     border-bottom:1px solid rgba(255,255,255,.08);
-    min-height:78px;
+    flex-shrink:0;
 }
 
 .sidebar-brand-icon{
@@ -60,8 +71,8 @@
     background:#2e7d32;
     border-radius:10px;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 }
 
 .sidebar-brand-icon img{
@@ -90,23 +101,36 @@
 =========================== */
 
 .sidebar-menu{
+    flex:1;
+    min-height:0;
     padding:16px 10px;
     display:flex;
     flex-direction:column;
     gap:6px;
-    flex:1;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+.sidebar-menu::-webkit-scrollbar{
+    width:4px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.22);
+    border-radius:999px;
 }
 
 .sidebar-item{
+    width:100%;
+    min-height:48px;
+    padding:14px 16px;
     display:flex;
     align-items:center;
     gap:14px;
-    text-decoration:none;
     color:#d9eadb;
-    padding:14px 16px;
+    text-decoration:none;
     border-radius:10px;
     transition:.2s;
-    min-height:48px;
 }
 
 .sidebar-item:hover,
@@ -120,8 +144,8 @@
     min-width:22px;
     height:22px;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 }
 
 .sidebar-item-icon svg,
@@ -135,6 +159,8 @@
 .sidebar-item-label{
     font-size:17px;
     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 /* ===========================
@@ -148,39 +174,39 @@
     display:flex;
     flex-direction:column;
     gap:10px;
+    flex-shrink:0;
 }
 
 .sidebar-user{
+    min-height:58px;
+    min-width:0;
+    padding:14px;
+    margin-bottom:8px;
     display:flex;
     align-items:center;
     gap:12px;
     background:rgba(255,255,255,.08);
-    padding:14px;
     border-radius:12px;
-    margin-bottom:8px;
-    min-height:58px;
 }
 
+.sidebar-user .avatar,
+.sidebar-user [class*="avatar"],
 .sidebar-user-avatar{
     width:42px;
     height:42px;
     min-width:42px;
     border-radius:50%;
     background:#2e7d32;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:800;
     color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    flex-shrink:0;
 }
 
-/* Soporte para el componente Avatar existente */
-.sidebar-user .avatar,
-.sidebar-user [class*="avatar"]{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
+.sidebar-user > div:last-child{
+    min-width:0;
 }
 
 .sidebar-user strong{
@@ -188,6 +214,8 @@
     font-size:14px;
     color:#ffffff;
     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .sidebar-user span,
@@ -196,17 +224,20 @@
     font-size:12px;
     opacity:.8;
     white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .sidebar-action{
     width:100%;
+    min-height:44px;
+    padding:12px 8px;
     display:flex;
     align-items:center;
     gap:12px;
     background:none;
     border:none;
     color:#d9eadb;
-    padding:12px 8px;
     cursor:pointer;
     font-size:16px;
     border-radius:8px;
@@ -224,8 +255,14 @@
     min-width:18px;
 }
 
+.sidebar-action span{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
 /* ===========================
-   SIDEBAR COLAPSADO
+   COLLAPSED
 =========================== */
 
 .admin-sidebar.collapsed{
@@ -247,20 +284,16 @@
 }
 
 .admin-sidebar.collapsed .sidebar-item{
-    justify-content:center;
     width:48px;
     height:48px;
+    min-height:48px;
     padding:0;
+    justify-content:center;
     gap:0;
 }
 
 .admin-sidebar.collapsed .sidebar-item-label{
     display:none;
-}
-
-.admin-sidebar.collapsed .sidebar-item-icon{
-    width:22px;
-    min-width:22px;
 }
 
 .admin-sidebar.collapsed .sidebar-footer{
@@ -269,37 +302,31 @@
 }
 
 .admin-sidebar.collapsed .sidebar-user{
-    justify-content:center;
     width:48px;
     height:48px;
+    min-height:48px;
     padding:0;
-    margin-bottom:8px;
+    justify-content:center;
 }
 
-.admin-sidebar.collapsed .sidebar-user > div:not(.avatar):not([class*="avatar"]):last-child{
+.admin-sidebar.collapsed .sidebar-user > div:last-child{
     display:none;
 }
 
-.admin-sidebar.collapsed .sidebar-user strong,
-.admin-sidebar.collapsed .sidebar-user span,
-.admin-sidebar.collapsed .sidebar-user small{
-    display:none;
-}
-
-.admin-sidebar.collapsed .sidebar-user-avatar,
 .admin-sidebar.collapsed .sidebar-user .avatar,
-.admin-sidebar.collapsed .sidebar-user [class*="avatar"]{
-    display:flex;
+.admin-sidebar.collapsed .sidebar-user [class*="avatar"],
+.admin-sidebar.collapsed .sidebar-user-avatar{
     width:34px;
     height:34px;
     min-width:34px;
 }
 
 .admin-sidebar.collapsed .sidebar-action{
-    justify-content:center;
     width:48px;
     height:44px;
+    min-height:44px;
     padding:0;
+    justify-content:center;
     gap:0;
 }
 
@@ -308,7 +335,7 @@
 }
 
 /* ===========================
-   RESPONSIVE
+   RESPONSIVE TABLET
 =========================== */
 
 @media (max-width:900px){
@@ -318,6 +345,7 @@
 
     .admin-layout .admin-main{
         margin-left:76px;
+        width:calc(100% - 76px);
     }
 
     .admin-sidebar .sidebar-brand{
@@ -335,29 +363,16 @@
     }
 
     .admin-sidebar .sidebar-item{
-        justify-content:center;
         width:48px;
         height:48px;
+        min-height:48px;
         padding:0;
+        justify-content:center;
         gap:0;
     }
 
     .admin-sidebar .sidebar-item-label{
         display:none;
-    }
-
-    .admin-sidebar .sidebar-item-icon{
-        display:flex;
-        width:22px;
-        min-width:22px;
-    }
-
-    .admin-sidebar .sidebar-item-icon svg,
-    .admin-sidebar .sidebar-item svg{
-        display:block;
-        width:20px;
-        height:20px;
-        min-width:20px;
     }
 
     .admin-sidebar .sidebar-footer{
@@ -366,37 +381,31 @@
     }
 
     .admin-sidebar .sidebar-user{
-        justify-content:center;
         width:48px;
         height:48px;
+        min-height:48px;
         padding:0;
-        margin-bottom:8px;
+        justify-content:center;
     }
 
-    .admin-sidebar .sidebar-user > div:not(.avatar):not([class*="avatar"]):last-child{
+    .admin-sidebar .sidebar-user > div:last-child{
         display:none;
     }
 
-    .admin-sidebar .sidebar-user strong,
-    .admin-sidebar .sidebar-user span,
-    .admin-sidebar .sidebar-user small{
-        display:none;
-    }
-
-    .admin-sidebar .sidebar-user-avatar,
     .admin-sidebar .sidebar-user .avatar,
-    .admin-sidebar .sidebar-user [class*="avatar"]{
-        display:flex;
+    .admin-sidebar .sidebar-user [class*="avatar"],
+    .admin-sidebar .sidebar-user-avatar{
         width:34px;
         height:34px;
         min-width:34px;
     }
 
     .admin-sidebar .sidebar-action{
-        justify-content:center;
         width:48px;
         height:44px;
+        min-height:44px;
         padding:0;
+        justify-content:center;
         gap:0;
     }
 
@@ -404,15 +413,14 @@
         display:none;
     }
 
-    .admin-sidebar .sidebar-action svg{
-        display:block;
-    }
-
     .admin-content{
         padding:20px;
-        overflow-x:hidden;
     }
 }
+
+/* ===========================
+   RESPONSIVE MOBILE
+=========================== */
 
 @media (max-width:640px){
     .admin-sidebar{
@@ -421,6 +429,12 @@
 
     .admin-layout .admin-main{
         margin-left:64px;
+        width:calc(100% - 64px);
+    }
+
+    .admin-sidebar .sidebar-brand{
+        min-height:68px;
+        padding:16px 8px;
     }
 
     .admin-sidebar .sidebar-brand-icon{
@@ -429,22 +443,103 @@
         min-width:38px;
     }
 
+    .admin-sidebar .sidebar-brand-icon img{
+        width:22px;
+        height:22px;
+    }
+
+    .admin-sidebar .sidebar-menu{
+        padding:14px 6px;
+    }
+
     .admin-sidebar .sidebar-item{
         width:44px;
         height:44px;
+        min-height:44px;
     }
 
     .admin-sidebar .sidebar-user{
         width:44px;
         height:44px;
+        min-height:44px;
     }
 
     .admin-sidebar .sidebar-action{
         width:44px;
         height:42px;
+        min-height:42px;
     }
 
     .admin-content{
         padding:16px;
+    }
+}
+
+@media (max-width:420px){
+    .admin-sidebar{
+        width:58px;
+    }
+
+    .admin-layout .admin-main{
+        margin-left:58px;
+        width:calc(100% - 58px);
+    }
+
+    .admin-sidebar .sidebar-brand{
+        min-height:62px;
+        padding:14px 6px;
+    }
+
+    .admin-sidebar .sidebar-brand-icon{
+        width:34px;
+        height:34px;
+        min-width:34px;
+    }
+
+    .admin-sidebar .sidebar-brand-icon img{
+        width:20px;
+        height:20px;
+    }
+
+    .admin-sidebar .sidebar-item{
+        width:40px;
+        height:40px;
+        min-height:40px;
+    }
+
+    .admin-sidebar .sidebar-item-icon svg,
+    .admin-sidebar .sidebar-item svg{
+        width:18px;
+        height:18px;
+        min-width:18px;
+    }
+
+    .admin-sidebar .sidebar-footer{
+        padding:14px 5px;
+    }
+
+    .admin-sidebar .sidebar-user{
+        width:40px;
+        height:40px;
+        min-height:40px;
+    }
+
+    .admin-sidebar .sidebar-user .avatar,
+    .admin-sidebar .sidebar-user [class*="avatar"],
+    .admin-sidebar .sidebar-user-avatar{
+        width:30px;
+        height:30px;
+        min-width:30px;
+        font-size:12px;
+    }
+
+    .admin-sidebar .sidebar-action{
+        width:40px;
+        height:40px;
+        min-height:40px;
+    }
+
+    .admin-content{
+        padding:14px 10px;
     }
 }
