@@ -1,5 +1,5 @@
 import { X, Plus } from "lucide-react";
-import { addToCart } from "../../services/cartService";
+
 
 function ProductDetail({ product, onClose, onAddToCart }) {
     if (!product) {
@@ -40,19 +40,18 @@ function ProductDetail({ product, onClose, onAddToCart }) {
                         ${Number(product.precio).toLocaleString("es-CL")}
                     </strong>
 
-                    <button
+                   <button
                         type="button"
                         className="customer-add-button"
+                        disabled={Number(product.stock || 0) <= 0}
                         onClick={() => {
-
-                            addToCart(product);
-
                             onAddToCart?.(product);
-
                         }}
                     >
                         <Plus size={18} />
-                        Agreguee al carrito
+                        {Number(product.stock || 0) <= 0
+                            ? "Sin stock"
+                            : "Agregar al carrito"}
                     </button>
                 </div>
             </section>

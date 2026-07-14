@@ -36,11 +36,16 @@ function Menu() {
         loadMenu();
     }, []);
 
-    function handleAddToCart(product) {
-        addToCart(product);
+   function handleAddToCart(product) {
+    const result = addToCart(product);
 
-        alert(`Se agregó "${product.nombre}" al carrito.`);
+    if (!result.ok) {
+        alert(result.message);
+        return;
     }
+
+    alert(result.message);
+}
 
     return (
         <CustomerLayout>

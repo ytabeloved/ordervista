@@ -2170,3 +2170,36 @@ a {
         font-size:10px;
     }
 }
+
+/* ===========================
+   OUT OF STOCK PRODUCT
+=========================== */
+
+.customer-product-card.out-of-stock{
+    opacity:.72;
+}
+
+.customer-product-card.out-of-stock .customer-product-image img{
+    filter:grayscale(.65);
+}
+
+.customer-product-stock-badge{
+    position:absolute;
+    left:12px;
+    bottom:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#fee2e2;
+    color:#b91c1c;
+    font-size:12px;
+    font-weight:800;
+}
+
+.customer-add-button:disabled{
+    background:#9ca3af;
+    cursor:not-allowed;
+}
+
+.customer-add-button:disabled:hover{
+    background:#9ca3af;
+}

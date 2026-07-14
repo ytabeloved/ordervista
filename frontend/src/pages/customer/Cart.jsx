@@ -61,27 +61,28 @@ function Cart() {
     }
 
     function handleIncrease(idProducto) {
+    const result = increaseQuantity(idProducto);
 
-        increaseQuantity(idProducto);
+        if (!result.ok) {
+            alert(result.message);
+        }
 
         refreshCart();
-
     }
 
     function handleDecrease(idProducto) {
+        const result = decreaseQuantity(idProducto);
 
-        decreaseQuantity(idProducto);
+        if (!result.ok) {
+            alert(result.message);
+        }
 
         refreshCart();
-
     }
 
     function handleRemove(idProducto) {
-
         removeFromCart(idProducto);
-
         refreshCart();
-
     }
 
     function handleClearCart() {
@@ -137,7 +138,7 @@ function Cart() {
         alert(`Pedido creado correctamente. N° ${response.id_pedido}`);
     } catch (error) {
         console.error(error);
-        alert("No fue posible crear el pedido.");
+        alert(error.response?.data?.mensaje || "No fue posible crear el pedido.");
     }
 }
 

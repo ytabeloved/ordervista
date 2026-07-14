@@ -1,9 +1,12 @@
 import { Plus } from "lucide-react";
 
 function ProductCard({ product, onView, onAddToCart }) {
+    const stock = Number(product.stock || 0);
+    const isOutOfStock = stock <= 0;
+
     return (
         <article
-            className="customer-product-card"
+            className={`customer-product-card ${isOutOfStock ? "out-of-stock" : ""}`}
             onClick={() => onView(product)}
         >
             <div className="customer-product-image">
@@ -18,6 +21,12 @@ function ProductCard({ product, onView, onAddToCart }) {
                 <span className="customer-product-category">
                     {product.categoria}
                 </span>
+
+                {isOutOfStock && (
+                    <span className="customer-product-stock-badge">
+                        Sin stock
+                    </span>
+                )}
             </div>
 
             <div className="customer-product-body">
@@ -33,13 +42,19 @@ function ProductCard({ product, onView, onAddToCart }) {
                 <button
                     type="button"
                     className="customer-add-button"
+                    disabled={isOutOfStock}
                     onClick={(e) => {
                         e.stopPropagation();
+
+                        if (isOutOfStock) {
+                            return;
+                        }
+
                         onAddToCart(product);
                     }}
                 >
                     <Plus size={18} />
-                    Agregar al carrito
+                    {isOutOfStock ? "Sin stock" : "Agregar al carrito"}
                 </button>
             </div>
         </article>

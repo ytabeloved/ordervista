@@ -15,7 +15,7 @@ async function createOrder(req, res) {
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
+        return res.status(error.statusCode || 500).json({
             mensaje: "Error al crear el pedido"
         });
     }
@@ -44,7 +44,7 @@ async function createInPersonOrder(req, res) {
     } catch (error) {
         console.error(error);
 
-        return res.status(500).json({
+        return res.status(error.statusCode || 500).json({
             mensaje: "Error al crear el pedido presencial"
         });
     }

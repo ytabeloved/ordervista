@@ -22,7 +22,9 @@ async function getMenu(req, res) {
                 product.id_categoria
             );
 
-            return productIsActive && categoryIsActive;
+            const productHasStock = Number(product.stock || 0) > 0;
+
+            return productIsActive && categoryIsActive && productHasStock;
         });
 
         res.json({

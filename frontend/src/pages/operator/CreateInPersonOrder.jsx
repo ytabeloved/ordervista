@@ -39,39 +39,63 @@ function CreateInPersonOrder() {
         }
     }
 
-    function addProduct(product) {
-        setCart((currentCart) => {
-            const existingItem = currentCart.find(
-                (item) => item.id_producto === product.id_producto
-            );
+function addProduct(product) {
+    const stock = Number(product.stock || 0);
 
-            if (existingItem) {
-                return currentCart.map((item) =>
-                    item.id_producto === product.id_producto
-                        ? { ...item, cantidad: item.cantidad + 1 }
-                        : item
-                );
+    if (stock <= 0) {
+        alert(`"${product.nombre}" no tiene stock disponible.`);
+        return;
+    }
+
+    setCart((currentCart) => {
+        const existingItem = currentCart.find(
+            (item) => item.id_producto === product.id_producto
+        );
+
+        if (existingItem) {
+            if (existingItem.cantidad >= stock) {
+                alert(`No puedes agregar más unidades de "${product.nombre}". Stock disponible: ${stock}.`);
+                return currentCart;
             }
 
-            return [
-                ...currentCart,
-                {
-                    ...product,
-                    cantidad: 1
-                }
-            ];
-        });
-    }
-
-    function increaseQuantity(idProducto) {
-        setCart((currentCart) =>
-            currentCart.map((item) =>
-                item.id_producto === idProducto
+            return currentCart.map((item) =>
+                item.id_producto === product.id_producto
                     ? { ...item, cantidad: item.cantidad + 1 }
                     : item
-            )
-        );
-    }
+            );
+        }
+
+        return [
+            ...currentCart,
+            {
+                ...product,
+                cantidad: 1
+            }
+        ];
+    });
+}
+
+    function increaseQuantity(idProducto) {
+    setCart((currentCart) =>
+        currentCart.map((item) => {
+            if (item.id_producto !== idProducto) {
+                return item;
+            }
+
+            const stock = Number(item.stock || 0);
+
+            if (item.cantidad >= stock) {
+                alert(`No puedes agregar más unidades de "${item.nombre}". Stock disponible: ${stock}.`);
+                return item;
+            }
+
+            return {
+                ...item,
+                cantidad: item.cantidad + 1
+            };
+        })
+    );
+}
 
     function decreaseQuantity(idProducto) {
         setCart((currentCart) =>

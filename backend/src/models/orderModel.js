@@ -6,6 +6,81 @@ async function createOrder(userId, order) {
     try {
         await connection.beginTransaction();
 
+        if (!order.items || order.items.length === 0) {
+            const error = new Error("El pedido no contiene productos.");
+            error.statusCode = 400;
+            throw error;
+        }
+
+        const validatedItems = [];
+        let calculatedTotal = 0;
+
+        for (const item of order.items) {
+            const cantidad = Number(item.cantidad);
+
+            if (!cantidad || cantidad <= 0) {
+                const error = new Error("Cantidad de producto inválida.");
+                error.statusCode = 400;
+                throw error;
+            }
+
+            const [products] = await connection.query(
+                `SELECT
+                    id_producto,
+                    nombre,
+                    precio,
+                    stock,
+                    activo
+                 FROM PRODUCTOS
+                 WHERE id_producto = ?
+                 FOR UPDATE`,
+                [item.id_producto]
+            );
+
+            const product = products[0];
+
+            if (!product) {
+                const error = new Error("Uno de los productos del pedido no existe.");
+                error.statusCode = 400;
+                throw error;
+            }
+
+            const productIsActive =
+                product.activo === true || product.activo === 1;
+
+            if (!productIsActive) {
+                const error = new Error(`El producto "${product.nombre}" no está disponible.`);
+                error.statusCode = 400;
+                throw error;
+            }
+
+            if (Number(product.stock) <= 0) {
+                const error = new Error(`El producto "${product.nombre}" no tiene stock disponible.`);
+                error.statusCode = 400;
+                throw error;
+            }
+
+            if (Number(product.stock) < cantidad) {
+                const error = new Error(
+                    `Stock insuficiente para "${product.nombre}". Disponible: ${product.stock}.`
+                );
+                error.statusCode = 400;
+                throw error;
+            }
+
+            const precioUnitario = Number(product.precio);
+            const subtotal = precioUnitario * cantidad;
+
+            calculatedTotal += subtotal;
+
+            validatedItems.push({
+                id_producto: product.id_producto,
+                cantidad,
+                precio_unitario: precioUnitario,
+                subtotal
+            });
+        }
+
         const [pedidoResult] = await connection.query(
             `INSERT INTO PEDIDOS
             (id_usuario, id_tipo_pedido, id_direccion, id_estado, total, observacion)
@@ -15,14 +90,14 @@ async function createOrder(userId, order) {
                 order.id_tipo_pedido,
                 order.id_direccion || null,
                 1,
-                order.total,
+                calculatedTotal,
                 order.observacion || ""
             ]
         );
 
         const idPedido = pedidoResult.insertId;
 
-        for (const item of order.items) {
+        for (const item of validatedItems) {
             await connection.query(
                 `INSERT INTO DETALLE_PEDIDO
                 (id_pedido, id_producto, cantidad, precio_unitario, subtotal)
@@ -33,6 +108,16 @@ async function createOrder(userId, order) {
                     item.cantidad,
                     item.precio_unitario,
                     item.subtotal
+                ]
+            );
+
+            await connection.query(
+                `UPDATE PRODUCTOS
+                 SET stock = stock - ?
+                 WHERE id_producto = ?`,
+                [
+                    item.cantidad,
+                    item.id_producto
                 ]
             );
         }

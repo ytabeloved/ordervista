@@ -5,6 +5,19 @@ function notifyCartUpdated() {
     window.dispatchEvent(new Event(CART_UPDATED_EVENT));
 }
 
+function getStock(product) {
+    return Number(product.stock || 0);
+}
+
+function isAvailable(product) {
+    const productIsActive =
+        product.activo === true ||
+        product.activo === 1 ||
+        product.activo === undefined;
+
+    return productIsActive && getStock(product) > 0;
+}
+
 export function getCart() {
     const cart = localStorage.getItem(STORAGE_KEY);
     return cart ? JSON.parse(cart) : [];
@@ -30,12 +43,29 @@ export function getCartCount() {
 export function addToCart(product) {
     const cart = getCart();
 
+    if (!isAvailable(product)) {
+        return {
+            ok: false,
+            cart,
+            message: `"${product.nombre}" no tiene stock disponible.`
+        };
+    }
+
     const existingItem = cart.find(
         item => item.id_producto === product.id_producto
     );
 
     if (existingItem) {
+        if (existingItem.cantidad >= getStock(product)) {
+            return {
+                ok: false,
+                cart,
+                message: `No puedes agregar más unidades de "${product.nombre}". Stock disponible: ${product.stock}.`
+            };
+        }
+
         existingItem.cantidad += 1;
+        existingItem.stock = product.stock;
     } else {
         cart.push({
             ...product,
@@ -45,7 +75,11 @@ export function addToCart(product) {
 
     saveCart(cart);
 
-    return cart;
+    return {
+        ok: true,
+        cart,
+        message: `"${product.nombre}" agregado al carrito.`
+    };
 }
 
 export function getCartTotal(cart) {
@@ -62,12 +96,30 @@ export function increaseQuantity(idProducto) {
         product => product.id_producto === idProducto
     );
 
-    if (item) {
-        item.cantidad++;
-        saveCart(cart);
+    if (!item) {
+        return {
+            ok: false,
+            cart,
+            message: "Producto no encontrado en el carrito."
+        };
     }
 
-    return cart;
+    if (item.cantidad >= getStock(item)) {
+        return {
+            ok: false,
+            cart,
+            message: `No puedes agregar más unidades de "${item.nombre}". Stock disponible: ${item.stock}.`
+        };
+    }
+
+    item.cantidad++;
+
+    saveCart(cart);
+
+    return {
+        ok: true,
+        cart
+    };
 }
 
 export function decreaseQuantity(idProducto) {
@@ -78,7 +130,11 @@ export function decreaseQuantity(idProducto) {
     );
 
     if (!item) {
-        return cart;
+        return {
+            ok: false,
+            cart,
+            message: "Producto no encontrado en el carrito."
+        };
     }
 
     item.cantidad--;
@@ -89,7 +145,10 @@ export function decreaseQuantity(idProducto) {
 
     saveCart(cart);
 
-    return cart;
+    return {
+        ok: true,
+        cart
+    };
 }
 
 export function removeFromCart(idProducto) {
@@ -99,5 +158,8 @@ export function removeFromCart(idProducto) {
 
     saveCart(cart);
 
-    return cart;
+    return {
+        ok: true,
+        cart
+    };
 }
