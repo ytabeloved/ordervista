@@ -2167,3 +2167,268 @@
         min-height:36px;
     }
 }
+
+/* ===========================
+   OPERATOR DESKTOP RESTORE
+   Pedidos / Cocina / Tickets / Recibos
+=========================== */
+
+@media (min-width:901px){
+
+    .operator-orders-page,
+    .operator-new-order-page,
+    .kitchen-page,
+    .kitchen-ticket-page,
+    .receipts-page{
+        width:100%;
+        max-width:1440px;
+        margin:0 auto;
+        overflow-x:visible;
+    }
+
+    .operator-orders-header{
+        flex-direction:row;
+        align-items:center;
+        justify-content:space-between;
+    }
+
+    .operator-orders-actions{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        width:auto;
+    }
+
+    .operator-search-box{
+        width:260px;
+        max-width:260px;
+    }
+
+    .operator-orders-board{
+        display:grid;
+        grid-template-columns:repeat(4, minmax(240px, 1fr));
+        gap:20px;
+        align-items:start;
+        overflow:visible;
+        padding-bottom:0;
+    }
+
+    .operator-order-column{
+        width:100%;
+        max-width:100%;
+    }
+
+    .operator-new-order-layout{
+        display:grid;
+        grid-template-columns:minmax(0, 1fr) 360px;
+        gap:28px;
+        align-items:start;
+    }
+
+    .operator-order-summary{
+        position:sticky;
+        top:24px;
+        width:100%;
+        max-width:360px;
+    }
+
+    .commands-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+        gap:18px;
+    }
+
+    /* Cocina: lista + preview controlado */
+    .kitchen-ticket-layout{
+        display:grid;
+        grid-template-columns:minmax(320px, 380px) minmax(0, 700px);
+        gap:24px;
+        align-items:start;
+        justify-content:center;
+        width:100%;
+    }
+
+    .kitchen-ticket-list-panel{
+        width:100%;
+        max-width:380px;
+    }
+
+    .ticket-preview-wrapper{
+        width:100%;
+        max-width:700px;
+        margin:0 auto;
+    }
+
+    .ticket-preview-header{
+        width:100%;
+        max-width:700px;
+        margin:0 auto;
+        flex-direction:row;
+        align-items:center;
+    }
+
+    .ticket-preview-actions{
+        width:auto;
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+    }
+
+    .kitchen-ticket{
+        width:100%;
+        max-width:700px;
+        margin:0 auto;
+        padding:36px 48px;
+        min-height:520px;
+        overflow-x:hidden;
+    }
+
+    /* Recibos: lista + comprobante tipo papel, no gigante */
+    .receipts-layout{
+        display:grid;
+        grid-template-columns:minmax(320px, 380px) minmax(0, 620px);
+        gap:24px;
+        align-items:start;
+        justify-content:center;
+        width:100%;
+    }
+
+    .receipt-list-panel{
+        width:100%;
+        max-width:380px;
+    }
+
+    .receipt-preview-wrapper{
+        width:100%;
+        max-width:620px;
+        margin:0 auto;
+    }
+
+    .receipt-preview-header{
+        width:100%;
+        max-width:620px;
+        margin:0 auto;
+        flex-direction:row;
+        align-items:center;
+    }
+
+    .receipt-ticket{
+        width:100%;
+        max-width:520px;
+        margin:0 auto;
+        padding:34px 42px;
+        min-height:520px;
+        overflow-x:hidden;
+    }
+
+    .receipt-payment-actions{
+        width:100%;
+        max-width:520px;
+        margin:0 auto;
+        flex-direction:row;
+        align-items:end;
+    }
+}
+
+/* Desktop intermedio: notebooks chicos */
+@media (min-width:901px) and (max-width:1200px){
+
+    .operator-orders-board{
+        grid-template-columns:repeat(2, minmax(260px, 1fr));
+    }
+
+    .kitchen-ticket-layout,
+    .receipts-layout{
+        grid-template-columns:340px minmax(0, 1fr);
+        justify-content:stretch;
+    }
+
+    .kitchen-ticket,
+    .receipt-ticket{
+        padding:30px 34px;
+    }
+}
+
+/* ===========================
+   RECEIPT PAYMENT FILTER
+=========================== */
+
+.receipt-payment-filter{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    width:100%;
+}
+
+.receipt-payment-filter button{
+    flex:1;
+    min-width:100px;
+    min-height:38px;
+    border:1px solid #e5e7eb;
+    background:#ffffff;
+    color:#4b6358;
+    border-radius:999px;
+    padding:8px 12px;
+    font-weight:800;
+    font-size:13px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:.2s;
+}
+
+.receipt-payment-filter button:hover{
+    border-color:#2e7d32;
+    color:#2e7d32;
+}
+
+.receipt-payment-filter button.active{
+    background:#2e7d32;
+    border-color:#2e7d32;
+    color:#ffffff;
+}
+
+.receipt-payment-filter button.active.pending{
+    background:#ff9800;
+    border-color:#ff9800;
+}
+
+.receipt-payment-filter button.active.paid{
+    background:#2e7d32;
+    border-color:#2e7d32;
+}
+
+.receipt-payment-filter span{
+    min-width:22px;
+    height:22px;
+    padding:0 7px;
+    border-radius:999px;
+    background:rgba(255,255,255,.24);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    line-height:1;
+}
+
+.receipt-payment-filter button:not(.active) span{
+    background:#f1f5f2;
+    color:#4b6358;
+}
+
+@media(max-width:768px){
+    .receipt-payment-filter{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:4px;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .receipt-payment-filter button{
+        flex:0 0 auto;
+        min-width:120px;
+    }
+}

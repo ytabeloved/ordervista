@@ -24,6 +24,7 @@ function Receipts() {
     const [selectedOrderId, setSelectedOrderId] = useState(null);
     const [paymentMethod, setPaymentMethod] = useState("EFECTIVO");
     const [search, setSearch] = useState("");
+    const [paymentFilter, setPaymentFilter] = useState("TODOS");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -151,16 +152,35 @@ function Receipts() {
         printWindow.close();
     }
 
+    function getPaymentStatus(order) {
+        return payments[order.id_pedido] ? "PAGADO" : "PENDIENTE";
+    }
+
     const filteredOrders = orders.filter((order) => {
         const term = search.toLowerCase();
 
-        return (
+        const matchesSearch =
             String(order.id_pedido).includes(term) ||
             (order.cliente_nombre || "").toLowerCase().includes(term) ||
             (order.cliente_email || "").toLowerCase().includes(term) ||
-            (order.items_text || "").toLowerCase().includes(term)
-        );
+            (order.items_text || "").toLowerCase().includes(term);
+
+        const paymentStatus = getPaymentStatus(order);
+
+        const matchesPaymentFilter =
+            paymentFilter === "TODOS" ||
+            paymentFilter === paymentStatus;
+
+        return matchesSearch && matchesPaymentFilter;
     });
+
+    const totalReceipts = orders.length;
+
+    const paidReceipts = orders.filter(
+        (order) => payments[order.id_pedido]
+    ).length;
+
+    const pendingReceipts = totalReceipts - paidReceipts;
 
     const selectedPayment = selectedOrder
         ? payments[selectedOrder.id_pedido]
@@ -191,11 +211,40 @@ function Receipts() {
                         />
                     </div>
 
+                    <div className="receipt-payment-filter">
+                        <button
+                            type="button"
+                            className={paymentFilter === "TODOS" ? "active" : ""}
+                            onClick={() => setPaymentFilter("TODOS")}
+                        >
+                            Todos
+                            <span>{totalReceipts}</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            className={paymentFilter === "PENDIENTE" ? "active pending" : ""}
+                            onClick={() => setPaymentFilter("PENDIENTE")}
+                        >
+                            Pendientes
+                            <span>{pendingReceipts}</span>
+                        </button>
+
+                        <button
+                            type="button"
+                            className={paymentFilter === "PAGADO" ? "active paid" : ""}
+                            onClick={() => setPaymentFilter("PAGADO")}
+                        >
+                            Pagados
+                            <span>{paidReceipts}</span>
+                        </button>
+                    </div>
+
                     {loading ? (
                         <p>Cargando pedidos...</p>
                     ) : filteredOrders.length === 0 ? (
                         <div className="operator-empty-column">
-                            No hay pedidos listos para comprobante.
+                            No hay comprobantes para este filtro.
                         </div>
                     ) : (
                         <div className="receipt-list">
