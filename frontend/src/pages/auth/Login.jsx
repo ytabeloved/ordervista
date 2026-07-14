@@ -153,11 +153,11 @@ function loadDemoUser(role) {
                 <div className="login-demo-buttons">
 
                     <button type="button" onClick={() => loadDemoUser("customer")}>
-                        Customer
+                        Cliente 
                     </button>
 
                     <button type="button" onClick={() => loadDemoUser("operator")}>
-                        Operator
+                        Operador
                     </button>
 
                     <button type="button" onClick={() => loadDemoUser("admin")}>
