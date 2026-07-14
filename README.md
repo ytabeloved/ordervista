@@ -196,6 +196,8 @@ ordervista/
 │
 └── README.md
 
+---
+
 ## 6. Instalación local
 
 ### Requisitos previos
