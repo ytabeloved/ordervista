@@ -47,28 +47,28 @@ function Dashboard() {
 
     const cards = [
         {
-            label: "Total revenue",
+            label: "Ventas estimadas",
             value: `$${Number(summary.ventas_estimadas || 0).toLocaleString("es-CL")}`,
             detail: "Ventas estimadas acumuladas",
             icon: <DollarSign size={22} />,
             type: "positive"
         },
         {
-            label: "Orders today",
+            label: "Pedidos de hoy",
             value: Number(metrics.orders_today || 0).toLocaleString("es-CL"),
             detail: `${Number(summary.total_pedidos || 0)} pedidos históricos`,
             icon: <ShoppingBag size={22} />,
             type: "positive"
         },
         {
-            label: "Total customers",
+            label: "Clientes registrados",
             value: Number(metrics.total_customers || 0).toLocaleString("es-CL"),
             detail: `${Number(summary.clientes_atendidos || 0)} clientes con pedidos`,
             icon: <Users size={22} />,
             type: "positive"
         },
         {
-            label: "Active products",
+            label: "Productos activos",
             value: Number(metrics.active_products || 0).toLocaleString("es-CL"),
             detail: `${Number(metrics.active_orders || 0)} pedidos activos`,
             icon: <Package size={22} />,
@@ -80,7 +80,7 @@ function Dashboard() {
         <section className="dashboard-page">
             <header className="dashboard-title">
                 <h1>Dashboard</h1>
-                <p>Overview of your business performance</p>
+                <p>Overview de tu rendimiento comercial</p>
             </header>
 
             {loading ? (
@@ -154,7 +154,7 @@ function Dashboard() {
 
                         <section className="dashboard-panel">
                             <div className="dashboard-panel-title">
-                                <h2>Sales by Category</h2>
+                                <h2>Ventas por Categoría</h2>
                                 <p>Distribución por categoría</p>
                             </div>
 
@@ -191,7 +191,7 @@ function Dashboard() {
 
                         <section className="dashboard-panel">
                             <div className="dashboard-panel-title">
-                                <h2>Order Status</h2>
+                                <h2>Estado de Pedidos</h2>
                                 <p>Estado actual de pedidos</p>
                             </div>
 
@@ -217,7 +217,7 @@ function Dashboard() {
 
                         <section className="dashboard-panel">
                             <div className="dashboard-panel-title">
-                                <h2>Top Products</h2>
+                                <h2>Top items</h2>
                                 <p>Productos más vendidos</p>
                             </div>
 
@@ -252,7 +252,7 @@ function Dashboard() {
                     <section className="dashboard-panel">
                         <div className="dashboard-panel-title horizontal">
                             <div>
-                                <h2>Recent Orders</h2>
+                                <h2>Pedidos recientes</h2>
                                 <p>Últimos pedidos registrados</p>
                             </div>
 
@@ -263,13 +263,13 @@ function Dashboard() {
                             <table className="dashboard-orders-table">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Customer</th>
-                                        <th>Type</th>
-                                        <th>Items</th>
+                                        <th>ID del Pedido</th>
+                                        <th>Cliente</th>
+                                        <th>Tipo</th>
+                                        <th>Productos</th>
                                         <th>Total</th>
-                                        <th>Status</th>
-                                        <th>Time</th>
+                                        <th>Estado</th>
+                                        <th>Hora</th>
                                     </tr>
                                 </thead>
 

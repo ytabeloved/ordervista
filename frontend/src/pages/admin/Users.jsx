@@ -109,19 +109,19 @@ function Users() {
             <section className="users-page">
 
                 <PageHeader
-                    title="Users"
-                    subtitle={`${crud.items.length} total users`}
-                    buttonText="Add User"
+                    title="Usuarios"
+                    subtitle={`${crud.items.length} usuarios registrados`}
+                    buttonText="Agregar Usuario"
                     onButtonClick={crud.openCreate}
                 />
 
                 <CrudToolbar
                     searchValue={search.search}
                     onSearchChange={search.setSearch}
-                    searchPlaceholder="Search users..."
+                    searchPlaceholder="Buscar usuarios..."
                     filters={[
                         {
-                            label: "All",
+                            label: "Todos",
                             value: "Todos"
                         },
                         {

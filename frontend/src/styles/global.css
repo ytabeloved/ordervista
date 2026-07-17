@@ -707,3 +707,77 @@ img{
         font-size:14px;
     }
 }
+
+/* ===========================
+   DESKTOP LAYOUT RESTORE
+   Evita que los fixes mobile rompan desktop
+=========================== */
+
+@media (min-width:901px){
+
+    .admin-main{
+        overflow-x:hidden;
+    }
+
+    .admin-content{
+        width:100%;
+        max-width:1500px;
+        margin:0 auto;
+        padding:28px 32px;
+        overflow-x:visible;
+    }
+
+    .admin-content > section{
+        width:100%;
+        max-width:100%;
+    }
+
+    .page-header{
+        flex-wrap:nowrap;
+        align-items:flex-start;
+    }
+
+    .page-header-info{
+        flex:1 1 auto;
+        min-width:0;
+    }
+
+    .crud-toolbar{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        justify-content:flex-start;
+        gap:12px;
+        flex-wrap:wrap;
+        width:100%;
+    }
+
+    .crud-toolbar .search-input{
+        flex:0 1 420px;
+        width:420px;
+        max-width:420px;
+    }
+
+    .crud-filters{
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+        gap:8px;
+        flex-wrap:wrap;
+        width:auto;
+        overflow:visible;
+    }
+
+    .crud-filters button{
+        width:auto;
+        white-space:nowrap;
+    }
+
+    .table-card,
+    .users-table-card,
+    .products-table-card{
+        width:100%;
+        max-width:100%;
+        overflow-x:auto;
+    }
+}

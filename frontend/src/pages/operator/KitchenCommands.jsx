@@ -168,8 +168,8 @@ function KitchenCommands() {
         <section className="kitchen-ticket-page">
             <header className="operator-orders-header">
                 <div>
-                    <h1>Kitchen Tickets</h1>
-                    <p>Select an order to view and print its kitchen ticket</p>
+                    <h1>Tickets de la Cocina</h1>
+                    <p>Selecciona un pedido para ver e imprimir su ticket de cocina</p>
                 </div>
 
                 <button type="button" onClick={loadCommands}>

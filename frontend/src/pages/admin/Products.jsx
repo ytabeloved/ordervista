@@ -149,27 +149,27 @@ function Products() {
             <section className="products-page">
 
                 <PageHeader
-                    title="Products"
-                    subtitle={`${crud.items.length} total products`}
-                    buttonText="Add Product"
+                    title="Productos"
+                    subtitle={`${crud.items.length} total productos`}
+                    buttonText="Agregar Producto"
                     onButtonClick={crud.openCreate}
                 />
 
                 <CrudToolbar
                     searchValue={search.search}
                     onSearchChange={search.setSearch}
-                    searchPlaceholder="Search products..."
+                    searchPlaceholder="Buscar productos..."
                     filters={[
                         {
-                            label: "All",
+                            label: "Todos",
                             value: "Todos"
                         },
                         {
-                            label: "Active",
+                            label: "Activos",
                             value: "Activos"
                         },
                         {
-                            label: "Inactive",
+                            label: "Inactivos",
                             value: "Inactivos"
                         }
                     ]}
@@ -198,8 +198,8 @@ function Products() {
                 <Modal
                     title={
                         crud.editingItem
-                            ? "Edit Product"
-                            : "New Product"
+                            ? "Editar Producto"
+                            : "Nuevo Producto"
                     }
                     onClose={crud.closeModal}
                 >
@@ -212,8 +212,8 @@ function Products() {
                         onCancel={crud.closeModal}
                         submitText={
                             crud.editingItem
-                                ? "Save Changes"
-                                : "Create Product"
+                                ? "guardar cambios"
+                                : "Crear Producto"
                         }
                     />
 
@@ -223,7 +223,7 @@ function Products() {
 
             <ConfirmDialog
                 open={crud.showDeleteModal}
-                title="Delete Product"
+                title="Borrar Producto"
                 message={`¿Seguro que deseas eliminar el producto ${crud.itemToDelete?.nombre ?? ""}?`}
                 confirmText="Eliminar"
                 cancelText="Cancelar"

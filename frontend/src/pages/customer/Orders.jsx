@@ -68,8 +68,8 @@ function Orders() {
         <CustomerLayout>
             <section className="customer-orders-page">
                 <header className="customer-orders-header">
-                    <h1>My Orders</h1>
-                    <p>Track your order history and current status</p>
+                    <h1>Mis Pedidos</h1>
+                    <p>Realiza un seguimiento de tu historial de pedidos y su estado actual</p>
                 </header>
 
                 <OrderStatusTabs

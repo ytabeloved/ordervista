@@ -2432,3 +2432,115 @@
         min-width:120px;
     }
 }
+
+/* ===========================
+   OR-86 DESKTOP OPERATOR FIXES
+   - Uniform order action buttons
+   - Prevent one product from stretching full width
+=========================== */
+
+@media (min-width: 1024px) {
+    .operator-orders-page,
+    .operator-new-order-page {
+        width: min(100% - 56px, 1500px);
+        max-width: 1500px;
+        margin: 0 auto;
+    }
+
+    .operator-orders-board {
+        grid-template-columns: repeat(4, minmax(240px, 1fr));
+        gap: 20px;
+        align-items: start;
+    }
+
+    .operator-order-card {
+        min-height: 176px;
+    }
+
+    .operator-order-footer {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .operator-order-footer strong {
+        display: block;
+        font-size: 18px;
+    }
+
+    .operator-order-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .operator-order-footer button,
+    .operator-order-footer .operator-cancel-button {
+        width: 100%;
+        min-height: 38px;
+        justify-content: center;
+        text-align: center;
+        white-space: normal;
+        line-height: 1.15;
+    }
+
+    .operator-order-footer .operator-cancel-button {
+        background: #ffffff;
+        color: #4b6358;
+        border: 1px solid #e5e7eb;
+    }
+
+    .operator-new-order-layout {
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 28px;
+        align-items: start;
+    }
+
+    .operator-menu-panel .product-grid {
+        grid-template-columns: repeat(4, minmax(210px, 1fr));
+        gap: 22px;
+        align-items: start;
+    }
+
+    .operator-menu-panel .customer-product-card {
+        width: 100%;
+        max-width: none;
+    }
+
+    .operator-menu-panel .customer-product-image {
+        height: 190px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1350px) {
+    .operator-menu-panel .product-grid {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+
+    .operator-orders-board {
+        grid-template-columns: repeat(2, minmax(260px, 1fr));
+    }
+}
+
+@media (max-width: 1023px) {
+    .operator-order-footer {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .operator-order-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .operator-order-footer button,
+    .operator-order-footer .operator-cancel-button {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -71,16 +71,16 @@ function Categories() {
                 <PageHeader
                     title="Categories"
                     subtitle={`${crud.items.length} total categories`}
-                    buttonText="Add Category"
+                    buttonText="agregar categoría"
                     onButtonClick={crud.openCreate}
                 />
 
                 <CrudToolbar
                     searchValue={search.search}
                     onSearchChange={search.setSearch}
-                    searchPlaceholder="Search categories..."
+                    searchPlaceholder="Buscar categorías..."
                     filters={[
-                        { label: "All", value: "Todos" },
+                        { label: "Todos", value: "Todos" },
                         { label: "Activas", value: "Activas" },
                         { label: "Inactivas", value: "Inactivas" }
                     ]}
@@ -115,8 +115,8 @@ function Categories() {
                         onCancel={crud.closeModal}
                         submitText={
                             crud.editingItem
-                                ? "Save Changes"
-                                : "Create Category"
+                                ? "guardar cambios"
+                                : "Crear Categoria"
                         }
                     />
                 </Modal>
@@ -124,7 +124,7 @@ function Categories() {
 
             <ConfirmDialog
                 open={crud.showDeleteModal}
-                title="Delete Category"
+                title="Borrar Categoría"
                 message={`¿Seguro que deseas eliminar la categoría ${crud.itemToDelete?.nombre ?? ""}?`}
                 confirmText="Eliminar"
                 cancelText="Cancelar"

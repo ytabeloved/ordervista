@@ -24,10 +24,10 @@ function UserTable({ users, onEdit, onDelete }) {
                 <table className="users-table">
                     <thead>
                         <tr>
-                            <th>User</th>
+                            <th>Usuario</th>
                             <th>Email</th>
-                            <th>Phone</th>
-                            <th>Role</th>
+                            <th>Telefono</th>
+                            <th>Rol</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
